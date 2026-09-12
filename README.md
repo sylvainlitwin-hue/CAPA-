@@ -20,7 +20,7 @@ diagnostic → qualification → recommandation → proposition personnalisée. 
 diagnostic est la seule porte d’entrée, et l’appel à l’action est toujours le
 même : « Évaluer mon entreprise » (`cta` dans `content/site.ts`). Ne pas
 réintroduire de grille tarifaire, de mention « à partir de », ni de « nous
-contacter pour connaître nos tarifs » : la section § 08 explique pourquoi il
+contacter pour connaître nos tarifs » : la section § 09 explique pourquoi il
 n’existe pas de prix standard.
 
 ```bash
@@ -39,8 +39,8 @@ npm run typecheck
 Rien n’est écrit en dur dans les composants : textes, titres, chiffres
 illustratifs, listes, liens, libellés de boutons, mentions légales de la page
 de gabarit. Le fichier est commenté section par section et suit l’ordre de
-lecture (`hero`, `me`, `recognition`, `timeCost`, `shadow`, `method`,
-`privateAi`, `noPrice`, `start`).
+lecture (`hero`, `me`, `recognition`, `timeCost`, `shadow`,
+`benchmarks`, `method`, `privateAi`, `noPrice`, `start`).
 
 Deux règles à respecter :
 
@@ -49,13 +49,23 @@ Deux règles à respecter :
    est fait à l’affichage par [`lib/format.ts`](lib/format.ts) — volontairement
    sans `Intl`, pour que le rendu serveur et le rendu navigateur soient
    identiques au caractère près.
-2. **Les deux calculs de la page sont dérivés dans un seul fichier**,
-   [`lib/capa.ts`](lib/capa.ts) : l’arithmétique du § 04 (15 min × 10 fois ×
-   220 jours = 550 h/an, soit 16 500 € à 30 €/h) et le Point CAPA. Modifier
-   `timeCost.params` suffit — les chiffres affichés, le graphique et les
-   libellés suivent et ne peuvent pas se contredire. Ce sont des ordres de
-   grandeur, pas des tarifs ; les mentions « exemple illustratif » sont
-   affichées à l’écran et ne doivent pas être retirées.
+2. **Deux sortes de chiffres, jamais mélangées.**
+
+   - **Les chiffres CALCULÉS (§ 04)** sont tous dérivés de `timeCost.params`
+     dans [`lib/capa.ts`](lib/capa.ts) : la multiplication, les deux grands
+     chiffres (550 h/an, 16 500 €/an), les trois conversions (2,5 h/jour,
+     12,5 h/semaine, 34 % d’un poste — base 1 607 h/an) et les douze cases de
+     l’abaque. Changer `minutes: 15` met tout à jour d’un coup ; aucune
+     valeur n’est saisie à la main, donc rien ne peut se contredire. Ce sont
+     des ordres de grandeur d’exemple, pas des tarifs, et les mentions
+     « exemple illustratif » ne doivent pas être retirées.
+   - **Les chiffres SOURCÉS (§ 06)** sont des statistiques publiques. Chacun
+     porte son organisme, son année, son périmètre et un lien cliquable vers
+     la publication. **Ne jamais ajouter de statistique sans ces quatre
+     éléments**, ne jamais présenter un ordre de grandeur d’exemple comme une
+     donnée d’enquête, et en cas de doute sur un chiffre : le retirer, pas
+     l’arrondir. Les chiffres actuels viennent de l’enquête TIC 2025 de
+     l’Insee et sont à réactualiser à chaque nouvelle vague.
 
 ### Brancher le diagnostic (Tally)
 
@@ -171,7 +181,7 @@ sur téléphone.
 ```
 app/
   layout.tsx              polices, métadonnées, repli <noscript>
-  page.tsx                assemblage des 9 sections
+  page.tsx                assemblage des 10 sections
   globals.css             design system (palette, échelles, grille, animations)
   mentions-legales/       gabarit légal (à compléter, aucune mention inventée)
   confidentialite/
@@ -180,13 +190,14 @@ components/
   Hero.tsx                01 — ce qu’il sait, puis ce qu’il ne sait pas
   Me.tsx                  02 — qui lui parle (portrait + signature)
   Recognition.tsx         03 — « vous vous reconnaissez ? »
-  TimeCost.tsx            04 — l’arithmétique + le Point CAPA
+  TimeCost.tsx            04 — l’arithmétique, l’abaque, le Point CAPA
   CapaPointChart.tsx      04 — le graphique (SVG, client)
   Shadow.tsx              05 — l’IA déjà présente, sans gouvernance
-  Method.tsx              06 — mesurer, prioriser, construire
-  PrivateAI.tsx           07 — sa propre IA, sans jargon
-  NoPrice.tsx             08 — pas de prix avant le problème
-  DiagnosticCTA.tsx       09 — l’unique appel à l’action + signature
+  Benchmarks.tsx          06 — repères chiffrés (statistiques sourcées)
+  Method.tsx              07 — mesurer, prioriser, construire
+  PrivateAI.tsx           08 — sa propre IA, sans jargon
+  NoPrice.tsx             09 — pas de prix avant le problème
+  DiagnosticCTA.tsx       10 — l’unique appel à l’action + signature
   Footer.tsx              pied de page + ligne de base
   figures/                portrait, schéma de l’unité locale
   ui/                     Section, SectionHeader, SectionFoot, Reveal, CountUp

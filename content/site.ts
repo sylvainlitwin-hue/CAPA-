@@ -16,10 +16,30 @@
  *
  *  ORDRE DE LECTURE
  *  01 Accroche · 02 Moi · 03 Vous vous reconnaissez ? · 04 Ce que coûtent
- *  15 minutes · 05 L'IA est déjà là · 06 Ma méthode · 07 Votre propre IA ·
- *  08 Pas de prix avant le problème · 09 Commencez simplement
+ *  15 minutes · 05 L'IA est déjà là · 06 Repères chiffrés · 07 Ma méthode ·
+ *  08 Votre propre IA · 09 Pas de prix avant le problème ·
+ *  10 Commencez simplement
+ *
+ *  DEUX SORTES DE CHIFFRES, JAMAIS MÉLANGÉES.
+ *  — Les chiffres CALCULÉS (§ 04) : dérivés de `timeCost.params` dans
+ *    lib/capa.ts. Arithmétique vérifiable, présentée comme un exemple.
+ *  — Les chiffres SOURCÉS (§ 06) : statistiques publiques, avec l'organisme,
+ *    l'année, le périmètre et le lien. Ne jamais ajouter de statistique sans
+ *    ces quatre éléments, et ne jamais présenter un ordre de grandeur
+ *    d'exemple comme une donnée d'enquête.
  * ─────────────────────────────────────────────────────────────────────────────
  */
+
+/** Chiffre sourcé du § 06. `accent` met le chiffre en bleu technique. */
+export type Benchmark = {
+  value: number;
+  unit: string;
+  label: string;
+  /** Année ou période de l'enquête — toujours affichée sous le chiffre. */
+  ref: string;
+  prefix?: string;
+  accent?: boolean;
+};
 
 export const brand = {
   name: 'CAPA',
@@ -37,7 +57,7 @@ export const brand = {
 /**
  * Liens. Le diagnostic pointera vers un formulaire Tally :
  * remplacer `diagnostic.href` par l'URL Tally (ex. https://tally.so/r/xxxxxx)
- * — ou renseigner `diagnostic.tallyFormId` pour l'afficher en embed en § 09.
+ * — ou renseigner `diagnostic.tallyFormId` pour l'afficher en embed en § 10.
  */
 export const links = {
   diagnostic: {
@@ -171,10 +191,32 @@ export const timeCost = {
   hoursUnit: 'heures / an',
   costUnit: '€ / an',
   disclaimer: 'Exemple illustratif. Vos chiffres seront différents.',
+  /** Les mêmes heures, dites autrement : c'est là que ça devient concret. */
+  conversions: {
+    label: 'Les mêmes heures, autrement',
+    perDay: 'par jour',
+    perWeek: 'par semaine',
+    fte: 'd’un poste à temps plein',
+    fteBasis: 'base 1 607 h / an',
+  },
   lines: [
     'Le problème n’est souvent pas une grosse perte.',
     'Ce sont des petites pertes répétées toute l’année.',
   ],
+  /**
+   * Abaque : le lecteur se situe lui-même. Toutes les cases sont calculées
+   * (minutes / 60 × jours × personnes × taux horaire) — aucune n'est saisie
+   * à la main. La case correspondant à l'exemple ci-dessus ressort en bleu.
+   */
+  table: {
+    label: 'Et si ce n’est pas 15 minutes',
+    rowsLabel: 'Temps perdu par jour, par personne',
+    colsUnit: 'personne',
+    colsUnitPlural: 'personnes',
+    minutesPerDay: [30, 60, 120, 150],
+    people: [1, 3, 10],
+    note: 'Coût annuel estimé au même taux horaire. La case bleue est l’exemple ci-dessus.',
+  },
   /** Le Point CAPA, réduit à l'essentiel : la façon dont je juge un investissement. */
   capaPoint: {
     label: 'Point CAPA',
@@ -218,10 +260,66 @@ export const shadow = {
   slogan: 'L’IA sauvage n’est pas une stratégie.',
 } as const;
 
-/* ── 06 — MA MÉTHODE ─────────────────────────────────────────────────────── */
+/* ── 06 — REPÈRES CHIFFRÉS ───────────────────────────────────────────────── */
+
+/**
+ * ⚠ STATISTIQUES PUBLIQUES — à vérifier avant mise en ligne, et à mettre à
+ * jour à chaque nouvelle vague d'enquête. Chaque chiffre porte son organisme,
+ * son année et son périmètre ; le lien renvoie à la publication.
+ *
+ * Aucune statistique ne doit figurer ici sans source vérifiable. En cas de
+ * doute sur un chiffre : le retirer, pas l'arrondir.
+ */
+export const benchmarks = {
+  index: '06',
+  sectionLabel: 'Repères',
+  note: 'CHIFFRES SOURCÉS',
+  title: 'Où en sont les autres ?',
+  figures: [
+    {
+      value: 18,
+      unit: '%',
+      label: 'des entreprises implantées en France utilisent au moins une technologie d’IA',
+      ref: '2025',
+    },
+    {
+      value: 15,
+      unit: '%',
+      label: 'chez les entreprises de 10 à 49 salariés',
+      ref: '2025',
+      accent: true,
+    },
+    {
+      value: 58,
+      unit: '%',
+      label: 'chez les entreprises de 250 salariés et plus',
+      ref: '2025',
+    },
+    {
+      value: 8,
+      prefix: '+',
+      unit: 'points',
+      label: 'de progression en un an, toutes tailles confondues',
+      ref: '2024 → 2025',
+    },
+  ] as Benchmark[],
+  source: {
+    label: 'Source',
+    text: 'Insee, enquête TIC 2025 — entreprises de 10 salariés ou plus. Moyenne de l’Union européenne : 20 %.',
+    href: 'https://www.insee.fr/fr/statistiques/9025878',
+    linkLabel: 'Insee Première n° 2120',
+  },
+  /** Ma lecture de ces chiffres — en « je », comme le reste de la page. */
+  reading: [
+    'Les grandes entreprises ont pris de l’avance.',
+    'Ce n’est pas une raison de copier ce qu’elles font : leurs problèmes ne sont pas les vôtres.',
+  ],
+} as const;
+
+/* ── 07 — MA MÉTHODE ─────────────────────────────────────────────────────── */
 
 export const method = {
-  index: '06',
+  index: '07',
   sectionLabel: 'Ma méthode',
   note: '3 ÉTAPES',
   title: 'Ma méthode est simple.',
@@ -243,10 +341,10 @@ export const method = {
   ],
 } as const;
 
-/* ── 07 — VOTRE PROPRE IA ────────────────────────────────────────────────── */
+/* ── 08 — VOTRE PROPRE IA ────────────────────────────────────────────────── */
 
 export const privateAi = {
-  index: '07',
+  index: '08',
   sectionLabel: 'Private AI',
   note: 'SI CELA A DU SENS',
   title: 'Et si cela a du sens, votre entreprise peut posséder sa propre IA.',
@@ -267,10 +365,10 @@ export const privateAi = {
   },
 } as const;
 
-/* ── 08 — PAS DE PRIX AVANT LE PROBLÈME ──────────────────────────────────── */
+/* ── 09 — PAS DE PRIX AVANT LE PROBLÈME ──────────────────────────────────── */
 
 export const noPrice = {
-  index: '08',
+  index: '09',
   sectionLabel: 'Pourquoi CAPA',
   note: 'AUCUN PRIX STANDARD',
   title: 'Je ne vous donne pas un prix avant de savoir ce qu’il y a à résoudre.',
@@ -283,10 +381,10 @@ export const noPrice = {
   promise: 'Si je pense que l’investissement n’est pas justifié, je vous le dirai.',
 } as const;
 
-/* ── 09 — COMMENCEZ SIMPLEMENT ───────────────────────────────────────────── */
+/* ── 10 — COMMENCEZ SIMPLEMENT ───────────────────────────────────────────── */
 
 export const start = {
-  index: '09',
+  index: '10',
   sectionLabel: 'Diagnostic',
   note: 'GRATUIT / 5 MIN',
   title: 'Commencez simplement.',

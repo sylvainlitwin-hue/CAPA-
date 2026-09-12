@@ -1,3 +1,4 @@
+import { Benchmarks } from '@/components/Benchmarks';
 import { DiagnosticCTA } from '@/components/DiagnosticCTA';
 import { Footer } from '@/components/Footer';
 import { Hero } from '@/components/Hero';
@@ -12,12 +13,13 @@ import { TimeCost } from '@/components/TimeCost';
 import { GridOverlay } from '@/components/ui/GridOverlay';
 
 /**
- * Neuf sections, un seul lecteur : un dirigeant de PME.
+ * Dix sections, un seul lecteur : un dirigeant de PME.
  *
  * 01 ce qu'il sait / ce qu'il ne sait pas · 02 qui lui parle ·
- * 03 la reconnaissance · 04 l'arithmétique · 05 l'IA déjà présente ·
- * 06 la méthode · 07 sa propre IA · 08 pas de prix avant le problème ·
- * 09 l'unique appel à l'action.
+ * 03 la reconnaissance · 04 l'arithmétique (chiffres calculés) ·
+ * 05 l'IA déjà présente · 06 les repères (statistiques sourcées) ·
+ * 07 la méthode · 08 sa propre IA · 09 pas de prix avant le problème ·
+ * 10 l'unique appel à l'action.
  */
 export default function Page() {
   return (
@@ -37,10 +39,11 @@ export default function Page() {
         {/* 03 */} <Recognition />
         {/* 04 */} <TimeCost />
         {/* 05 */} <Shadow />
-        {/* 06 */} <Method />
-        {/* 07 */} <PrivateAI />
-        {/* 08 */} <NoPrice />
-        {/* 09 */} <DiagnosticCTA />
+        {/* 06 */} <Benchmarks />
+        {/* 07 */} <Method />
+        {/* 08 */} <PrivateAI />
+        {/* 09 */} <NoPrice />
+        {/* 10 */} <DiagnosticCTA />
       </main>
 
       <Footer />
