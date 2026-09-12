@@ -203,6 +203,17 @@
     );
   }
 
+  /* Hachure très légère : territoire non gouverné, hors du périmètre. */
+  .hatch-faint {
+    background-image: repeating-linear-gradient(
+      -45deg,
+      rgba(20, 20, 20, 0.14) 0,
+      rgba(20, 20, 20, 0.14) 1px,
+      transparent 1px,
+      transparent 9px
+    );
+  }
+
   /* Papier millimétré, très faible densité. Usage parcimonieux. */
   .graph-paper {
     background-image: linear-gradient(to right, rgba(20, 20, 20, 0.055) 1px, transparent 1px),

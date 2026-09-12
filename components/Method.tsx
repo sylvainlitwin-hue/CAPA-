@@ -1,5 +1,5 @@
 import { Reveal } from '@/components/ui/Reveal';
-import { Section, SectionHeader } from '@/components/ui/Section';
+import { Section, SectionFoot, SectionHeader } from '@/components/ui/Section';
 import { method } from '@/content/site';
 
 export function Method() {
@@ -47,13 +47,14 @@ export function Method() {
           ))}
         </ol>
 
-        <div className="flex justify-end pb-16 pt-10 md:pb-24 md:pt-14">
+        <div className="flex justify-end pb-14 pt-10 md:pb-20 md:pt-14">
           <Reveal delay={200}>
             <p className="label max-w-[40ch] leading-relaxed text-ink-soft md:text-right">
               {method.flowNote}
             </p>
           </Reveal>
         </div>
+        <SectionFoot index={method.index} />
       </div>
     </Section>
   );

@@ -1,5 +1,5 @@
 import { Reveal } from '@/components/ui/Reveal';
-import { Section, SectionHeader } from '@/components/ui/Section';
+import { Section, SectionFoot, SectionHeader } from '@/components/ui/Section';
 import { manifesto } from '@/content/site';
 
 export function Manifesto() {
@@ -83,6 +83,7 @@ export function Manifesto() {
             ))}
           </ol>
         </div>
+        <SectionFoot index={manifesto.index} />
       </div>
     </Section>
   );

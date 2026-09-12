@@ -1,7 +1,7 @@
 import { CapaPointChart } from '@/components/CapaPointChart';
 import { CountUp } from '@/components/ui/CountUp';
 import { Reveal } from '@/components/ui/Reveal';
-import { Section, SectionHeader } from '@/components/ui/Section';
+import { Section, SectionFoot, SectionHeader } from '@/components/ui/Section';
 import { capaMath } from '@/lib/capa';
 import { formatFr } from '@/lib/format';
 import { businessCase } from '@/content/site';
@@ -138,6 +138,8 @@ export function CapaPointGraph() {
             </p>
           </div>
         </div>
+
+        <SectionFoot index={businessCase.index} />
       </div>
     </Section>
   );

@@ -1,15 +1,15 @@
 import { CountUp } from '@/components/ui/CountUp';
 import { Reveal } from '@/components/ui/Reveal';
-import { Section, SectionHeader } from '@/components/ui/Section';
+import { Section, SectionFoot, SectionHeader } from '@/components/ui/Section';
 import { founder, links } from '@/content/site';
 
 export function FounderOffer() {
-  const { offer } = founder;
+  const { offer, policy } = founder;
 
   return (
     <Section id="offre-fondateur">
       <div className="shell">
-        <SectionHeader index={founder.index} label={founder.sectionLabel} note="PHASE FONDATRICE" />
+        <SectionHeader index={founder.index} label={founder.sectionLabel} note={founder.note} />
 
         <div className="grid12 pt-10 md:pt-16">
           <div className="col-span-4 md:col-span-8">
@@ -70,6 +70,33 @@ export function FounderOffer() {
             </ol>
           </div>
 
+          {/* ── Charte IA : le volet gouvernance du programme ─────────── */}
+          <div className="border-t border-[var(--rule-strong)] px-4 py-5 md:px-6 md:py-7">
+            <div className="flex flex-col gap-1 md:flex-row md:items-baseline md:justify-between md:gap-4">
+              <span className="label text-blue">{policy.label}</span>
+              <span className="label text-ink-mute">{policy.name}</span>
+            </div>
+            <p className="body-text mt-4 max-w-measure">{policy.intro}</p>
+
+            <ul className="mt-5 grid grid-cols-1 border-b border-rule md:grid-cols-2 md:gap-x-12">
+              {policy.items.map((item, i) => (
+                <Reveal
+                  as="li"
+                  key={item}
+                  delay={(i % 5) * 50}
+                  className="flex items-baseline gap-4 border-t border-rule py-2.5"
+                >
+                  <span className="label w-6 shrink-0 text-ink-mute">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <span className="text-[0.9375rem] leading-snug">{item}</span>
+                </Reveal>
+              ))}
+            </ul>
+
+            <p className="display display-md mt-6 text-blue">{policy.benefit}</p>
+          </div>
+
           <div className="flex flex-col gap-5 border-t border-[var(--rule-strong)] px-4 py-5 md:flex-row md:items-center md:justify-between md:px-6">
             <div>
               <p className="label text-ink">{offer.exclusion}</p>
@@ -84,7 +111,8 @@ export function FounderOffer() {
           </div>
         </div>
 
-        <div className="h-16 md:h-24" />
+        <div className="h-14 md:h-20" />
+        <SectionFoot index={founder.index} />
       </div>
     </Section>
   );

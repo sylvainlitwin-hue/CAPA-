@@ -1,12 +1,12 @@
 import { Reveal } from '@/components/ui/Reveal';
-import { Section, SectionHeader } from '@/components/ui/Section';
+import { Section, SectionFoot, SectionHeader } from '@/components/ui/Section';
 import { useCases } from '@/content/site';
 
 export function UseCases() {
   return (
     <Section id="usages">
       <div className="shell">
-        <SectionHeader index={useCases.index} label={useCases.sectionLabel} note="6 DOMAINES" />
+        <SectionHeader index={useCases.index} label={useCases.sectionLabel} note={useCases.note} />
 
         <div className="grid12 pt-10 md:pt-16">
           <div className="col-span-4 md:col-span-8">
@@ -44,12 +44,13 @@ export function UseCases() {
           ))}
         </dl>
 
-        <div className="flex justify-between gap-6 pb-16 pt-4 md:pb-24">
+        <div className="flex justify-between gap-6 pb-14 pt-4 md:pb-20">
           <span className="label text-ink-mute">
             {String(useCases.items.length).padStart(2, '0')} domaines — une seule capacité
           </span>
           <span className="label hidden text-ink-mute md:block">FIN DU TABLEAU</span>
         </div>
+        <SectionFoot index={useCases.index} />
       </div>
     </Section>
   );

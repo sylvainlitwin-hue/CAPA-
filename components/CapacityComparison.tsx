@@ -1,6 +1,6 @@
 import { CountUp } from '@/components/ui/CountUp';
 import { Reveal } from '@/components/ui/Reveal';
-import { Section, SectionHeader } from '@/components/ui/Section';
+import { Section, SectionFoot, SectionHeader } from '@/components/ui/Section';
 import { formatFr } from '@/lib/format';
 import { capacity } from '@/content/site';
 
@@ -11,7 +11,7 @@ export function CapacityComparison() {
   return (
     <Section id="capacite">
       <div className="shell">
-        <SectionHeader index={capacity.index} label={capacity.sectionLabel} note="ARBITRAGE" />
+        <SectionHeader index={capacity.index} label={capacity.sectionLabel} note={capacity.note} />
 
         <div className="grid12 pt-10 md:pt-16">
           <div className="col-span-4 md:col-span-11">
@@ -92,7 +92,7 @@ export function CapacityComparison() {
         </div>
 
         {/* ── Position ────────────────────────────────────────────────────── */}
-        <div className="pb-16 pt-14 md:pb-24 md:pt-24">
+        <div className="pb-14 pt-14 md:pb-20 md:pt-24">
           <div className="grid12">
             <div className="col-span-4 border-t-2 border-ink pt-6 md:col-span-9">
               <p className="display display-md">
@@ -104,6 +104,7 @@ export function CapacityComparison() {
             </div>
           </div>
         </div>
+        <SectionFoot index={capacity.index} />
       </div>
     </Section>
   );

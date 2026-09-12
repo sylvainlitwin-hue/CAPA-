@@ -55,3 +55,24 @@ export function SectionHeader({ index, label, note, invert = false }: SectionHea
     </div>
   );
 }
+
+/**
+ * Folio de bas de section — convention d'imprimé : chaque section se ferme
+ * comme une page de rapport, titre courant à gauche, numéro au centre.
+ */
+export function SectionFoot({ index, invert = false }: { index: string; invert?: boolean }) {
+  const rule = invert ? 'bg-paper/25' : 'bg-[var(--rule)]';
+  const muted = invert ? 'text-paper/45' : 'text-ink-mute';
+
+  return (
+    <div className="pb-6 md:pb-8" aria-hidden="true">
+      <div className={`h-px w-full ${rule}`} />
+      <div className="mt-2 flex items-baseline justify-between gap-4">
+        <span className={`label ${muted}`}>
+          {brand.name} · {brand.documentTitle} {brand.edition}
+        </span>
+        <span className={`label ${muted}`}>— {index} —</span>
+      </div>
+    </div>
+  );
+}

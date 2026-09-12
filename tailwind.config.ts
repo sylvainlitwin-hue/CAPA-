@@ -30,10 +30,15 @@ const config: Config = {
         'rule-strong': 'rgba(20,20,20,0.45)',
         'rule-invert': 'rgba(242,239,230,0.22)',
       },
+      // Aucun arrondi nulle part : c'est une page imprimée, pas une interface.
       borderRadius: {
         none: '0',
-        sm: '1px',
-        DEFAULT: '2px',
+        sm: '0',
+        DEFAULT: '0',
+        md: '0',
+        lg: '0',
+        xl: '0',
+        full: '0',
       },
       letterSpacing: {
         tightest: '-0.045em',

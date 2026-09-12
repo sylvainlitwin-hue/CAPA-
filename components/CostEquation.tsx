@@ -1,5 +1,5 @@
 import { Reveal } from '@/components/ui/Reveal';
-import { Section, SectionHeader } from '@/components/ui/Section';
+import { Section, SectionFoot, SectionHeader } from '@/components/ui/Section';
 import { hiddenCosts } from '@/content/site';
 
 export function CostEquation() {
@@ -93,6 +93,7 @@ export function CostEquation() {
               </Reveal>
             </p>
           </div>
+          <SectionFoot index={hiddenCosts.index} />
         </div>
       </div>
     </Section>

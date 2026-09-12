@@ -47,17 +47,18 @@ export function Hero() {
           {/* ── Fiche technique ──────────────────────────────────────────── */}
           <div className="col-span-4 mt-12 md:col-span-4 md:mt-2">
             <Reveal delay={200}>
-              <div className="border border-[var(--rule-strong)]">
-                <div className="flex items-baseline justify-between bg-ink px-3 py-2.5 text-paper">
+              {/* Tableau technique : filets, pas de caisson. */}
+              <div className="border-t-2 border-ink">
+                <div className="flex items-baseline justify-between bg-ink px-2 py-2.5 text-paper">
                   <span className="label">{hero.panel.title}</span>
                   <span className="label text-paper/55">{hero.panel.ref}</span>
                 </div>
 
-                <dl className="px-3">
+                <dl>
                   {hero.panel.rows.map((row) => (
                     <div
                       key={row.n}
-                      className="flex items-baseline justify-between gap-4 border-b border-rule py-3 last:border-b-0"
+                      className="flex items-baseline justify-between gap-4 border-b border-rule px-2 py-3"
                     >
                       <dt className="flex items-baseline gap-3">
                         <span className="label text-blue">{row.n}</span>
@@ -70,7 +71,7 @@ export function Hero() {
                   ))}
                 </dl>
 
-                <div className="border-t border-[var(--rule-strong)] px-3 py-2.5">
+                <div className="px-2 py-2.5">
                   <span className="label text-ink">
                     {hero.panel.footer} <span className="caret" aria-hidden="true" />
                   </span>

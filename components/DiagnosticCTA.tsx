@@ -1,5 +1,5 @@
 import { Reveal } from '@/components/ui/Reveal';
-import { Section, SectionHeader } from '@/components/ui/Section';
+import { Section, SectionFoot, SectionHeader } from '@/components/ui/Section';
 import { diagnostic, links } from '@/content/site';
 
 const isExternal = (href: string) => /^https?:\/\//.test(href);
@@ -15,7 +15,7 @@ export function DiagnosticCTA() {
         <SectionHeader
           index={diagnostic.index}
           label={diagnostic.sectionLabel}
-          note="GRATUIT / 5 MIN"
+          note={diagnostic.note}
           invert
         />
 
@@ -53,12 +53,16 @@ export function DiagnosticCTA() {
         {/* ── Ce qu'il demande ─────────────────────────────────────────────── */}
         <div className="mt-14 border-t border-rule-invert pt-3 md:mt-20">
           <span className="label text-paper/55">{diagnostic.includesLabel}</span>
-          <ul className="mt-5 grid grid-cols-2 gap-px bg-[rgba(242,239,230,0.18)] md:grid-cols-6">
+          {/* Un tableau réglé, pas des pastilles. Sur fond graphite, le bleu
+              technique ne passe pas le contraste AA en petit corps : on
+              inverse l'emphase. */}
+          <ul className="mt-5 grid grid-cols-2 border-t border-rule-invert md:grid-cols-6">
             {diagnostic.includes.map((item, i) => (
-              <li key={item} className="bg-ink">
-                {/* Sur fond graphite, le bleu technique ne passe pas le
-                    contraste AA en petit corps : on inverse l'emphase. */}
-                <Reveal delay={i * 50} className="flex items-baseline gap-2 px-3 py-4">
+              <li
+                key={item}
+                className="border-b border-rule-invert md:border-b-0 md:border-l md:border-rule-invert md:first:border-l-0"
+              >
+                <Reveal delay={i * 50} className="flex items-baseline gap-2 py-4 md:px-3">
                   <span className="label text-paper">{String(i + 1).padStart(2, '0')}</span>
                   <span className="label text-paper/70">{item}</span>
                 </Reveal>
@@ -100,6 +104,7 @@ export function DiagnosticCTA() {
             </div>
           ) : null}
         </div>
+        <SectionFoot index={diagnostic.index} invert />
       </div>
     </Section>
   );

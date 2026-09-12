@@ -1,5 +1,5 @@
 import { Reveal } from '@/components/ui/Reveal';
-import { Section, SectionHeader } from '@/components/ui/Section';
+import { Section, SectionFoot, SectionHeader } from '@/components/ui/Section';
 import { brand, finalManifesto } from '@/content/site';
 
 export function FinalManifesto() {
@@ -9,7 +9,7 @@ export function FinalManifesto() {
         <SectionHeader
           index={finalManifesto.index}
           label={finalManifesto.sectionLabel}
-          note="POSITION / 02"
+          note={finalManifesto.note}
         />
 
         <div className="grid12 pt-10 md:pt-20">
@@ -55,14 +55,12 @@ export function FinalManifesto() {
             </p>
           </Reveal>
 
-          <div className="mt-10 flex flex-col gap-5 border-t border-ink pt-6 md:flex-row md:items-center md:justify-between">
+          <div className="mt-10 border-t border-ink pt-6">
             <p className="label max-w-[44ch] leading-relaxed text-ink">{brand.signatureMono}</p>
-            <a href={finalManifesto.cta.href} className="btn btn-primary shrink-0">
-              {finalManifesto.cta.label}
-              <span aria-hidden="true">→</span>
-            </a>
           </div>
         </div>
+
+        <SectionFoot index={finalManifesto.index} />
       </div>
     </Section>
   );
