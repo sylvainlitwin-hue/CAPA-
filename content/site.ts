@@ -59,20 +59,22 @@ export const links = {
   ],
 } as const;
 
+/**
+ * L'appel à l'action unique. Un seul libellé sur toute la page — barre de
+ * navigation comprise. Ne pas en introduire un second.
+ */
+export const cta = {
+  label: 'Évaluer mon entreprise',
+  href: '#diagnostic',
+  microcopy: 'Gratuit · 5 minutes · Aucun document confidentiel nécessaire',
+} as const;
+
 export const nav = {
   items: [
     { label: 'Ma méthode', href: '#methode' },
     { label: 'Private AI', href: '#private-ai' },
     { label: 'Diagnostic', href: '#diagnostic' },
   ],
-  cta: { label: 'Diagnostic gratuit', href: '#diagnostic' },
-} as const;
-
-/** L'appel à l'action unique, répété sur toute la page. */
-export const cta = {
-  label: 'Évaluer mon entreprise',
-  href: '#diagnostic',
-  microcopy: 'Gratuit · 5 minutes · Aucun document confidentiel nécessaire',
 } as const;
 
 /**

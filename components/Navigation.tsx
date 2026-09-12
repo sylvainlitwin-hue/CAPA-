@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { brand, nav } from '@/content/site';
+import { brand, cta, nav } from '@/content/site';
 
 export function Navigation() {
   const [open, setOpen] = useState(false);
@@ -58,7 +58,7 @@ export function Navigation() {
             <span className="label hidden text-ink-mute sm:inline">CAPACITÉ</span>
           </a>
 
-          <nav aria-label="Navigation principale" className="hidden items-center gap-8 md:flex">
+          <nav aria-label="Navigation principale" className="hidden items-center gap-8 lg:flex">
             {nav.items.map((item) => (
               <a
                 key={item.href}
@@ -68,8 +68,9 @@ export function Navigation() {
                 {item.label}
               </a>
             ))}
-            <a href={nav.cta.href} className="btn btn-primary gap-3 py-2.5">
-              {nav.cta.label}
+            {/* Un seul libellé d'appel à l'action sur toute la page. */}
+            <a href={cta.href} className="btn btn-primary gap-3 whitespace-nowrap py-2.5">
+              {cta.label}
               <span aria-hidden="true">→</span>
             </a>
           </nav>
@@ -77,7 +78,7 @@ export function Navigation() {
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
-            className="label flex items-center gap-2 border border-[var(--rule-strong)] px-3 py-2 md:hidden"
+            className="label flex items-center gap-2 border border-[var(--rule-strong)] px-3 py-2 lg:hidden"
             aria-expanded={open}
             aria-controls="menu-mobile"
           >
@@ -88,7 +89,7 @@ export function Navigation() {
       </div>
 
       {open ? (
-        <div id="menu-mobile" className="border-b border-[var(--rule-strong)] bg-paper md:hidden">
+        <div id="menu-mobile" className="border-b border-[var(--rule-strong)] bg-paper lg:hidden">
           <div className="shell py-2">
             {nav.items.map((item, i) => (
               <a
@@ -104,11 +105,11 @@ export function Navigation() {
               </a>
             ))}
             <a
-              href={nav.cta.href}
+              href={cta.href}
               onClick={() => setOpen(false)}
               className="btn btn-primary my-4 w-full"
             >
-              {nav.cta.label}
+              {cta.label}
               <span aria-hidden="true">→</span>
             </a>
           </div>
