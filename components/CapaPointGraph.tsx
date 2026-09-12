@@ -49,6 +49,7 @@ export function CapaPointGraph() {
                 droite, les unités sur un même fer à gauche. */}
             {businessCase.rows.map((row, i) => (
               <Reveal
+                as="div"
                 key={row.label}
                 delay={i * 60}
                 className="grid grid-cols-[1fr_auto_4.5rem] items-baseline gap-x-3 border-b border-rule py-4 md:gap-x-4 md:py-5"

@@ -95,6 +95,16 @@
     }
   }
 
+  /* Les éléments d'apparition sont des <span> (un titre ou un paragraphe ne
+     peut pas contenir de <div>) : il faut donc les passer en bloc. Déclaré
+     dans la couche « components » pour qu'une utilitaire de disposition
+     (grid, flex, hidden…) reprenne la main. */
+  .reveal,
+  .draw-x,
+  .draw-y {
+    display: block;
+  }
+
   /* Étiquette monospace : numéros de section, annotations, repères. */
   .label {
     font-family: var(--font-mono), ui-monospace, monospace;

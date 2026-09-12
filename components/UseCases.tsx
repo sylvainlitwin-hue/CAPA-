@@ -26,6 +26,7 @@ export function UseCases() {
               {/* Mobile : numéro + intitulé sur la même ligne, texte dessous.
                   Desktop : trois colonnes de grille, comme un tableau. */}
               <Reveal
+                as="div"
                 delay={i * 60}
                 className="group grid grid-cols-[auto_1fr] items-baseline gap-x-4 py-5 md:grid-cols-12 md:gap-x-6 md:py-7"
               >
