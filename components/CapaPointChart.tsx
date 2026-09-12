@@ -3,7 +3,7 @@
 import { capaMath } from '@/lib/capa';
 import { formatFr } from '@/lib/format';
 import { useScrollProgress } from '@/lib/useInView';
-import { businessCase } from '@/content/site';
+import { timeCost } from '@/content/site';
 
 /**
  * ─────────────────────────────────────────────────────────────────────────────
@@ -20,7 +20,7 @@ import { businessCase } from '@/content/site';
  * ─────────────────────────────────────────────────────────────────────────────
  */
 
-const { beforeLabel, afterLabel, axisLabel } = businessCase.chart;
+const { beforeLabel, afterLabel, axisLabel } = timeCost.capaPoint.chart;
 const { investment, horizonMonths, breakevenMonths, netAtHorizon } = capaMath;
 
 type Variant = 'wide' | 'narrow';

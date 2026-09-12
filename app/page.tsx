@@ -1,37 +1,23 @@
-import { Architecture } from '@/components/Architecture';
-import { CapacityComparison } from '@/components/CapacityComparison';
-import { CapaPointGraph } from '@/components/CapaPointGraph';
-import { CostEquation } from '@/components/CostEquation';
-import { DataFrontier } from '@/components/DataFrontier';
 import { DiagnosticCTA } from '@/components/DiagnosticCTA';
-import { FinalManifesto } from '@/components/FinalManifesto';
 import { Footer } from '@/components/Footer';
-import { FounderClose, FounderInterlude, FounderIntro } from '@/components/FounderVoice';
 import { Hero } from '@/components/Hero';
-import { Manifesto } from '@/components/Manifesto';
+import { Me } from '@/components/Me';
 import { Method } from '@/components/Method';
 import { Navigation } from '@/components/Navigation';
-import { NextStep } from '@/components/NextStep';
-import { Positioning } from '@/components/Positioning';
+import { NoPrice } from '@/components/NoPrice';
 import { PrivateAI } from '@/components/PrivateAI';
-import { SensitiveData } from '@/components/SensitiveData';
-import { ShadowAI } from '@/components/ShadowAI';
-import { TwoQuestions } from '@/components/TwoQuestions';
-import { UseCases } from '@/components/UseCases';
-import { WhyNoPrice } from '@/components/WhyNoPrice';
+import { Recognition } from '@/components/Recognition';
+import { Shadow } from '@/components/Shadow';
+import { TimeCost } from '@/components/TimeCost';
 import { GridOverlay } from '@/components/ui/GridOverlay';
 
 /**
- * Ordre de lecture du document.
+ * Neuf sections, un seul lecteur : un dirigeant de PME.
  *
- * L'humain parle avant la technologie (02), le raisonnement économique
- * s'établit (03 → 06), le risque de gouvernance est posé (07 → 11), une
- * dernière parole humaine précède l'infrastructure, qui n'arrive qu'en
- * conséquence (12). Les blocs sans numéro sont des pages de respiration.
- *
- * Aucun prix n'est affiché : tout converge vers le diagnostic (15), la
- * recommandation vient après (16), et l'absence de tarif standard est
- * assumée et expliquée (17).
+ * 01 ce qu'il sait / ce qu'il ne sait pas · 02 qui lui parle ·
+ * 03 la reconnaissance · 04 l'arithmétique · 05 l'IA déjà présente ·
+ * 06 la méthode · 07 sa propre IA · 08 pas de prix avant le problème ·
+ * 09 l'unique appel à l'action.
  */
 export default function Page() {
   return (
@@ -47,26 +33,14 @@ export default function Page() {
 
       <main>
         {/* 01 */} <Hero />
-        {/* 02 */} <FounderIntro />
-        {/* 03 */} <Manifesto />
-        {/* 04 */} <CostEquation />
-        {/* 05 */} <CapaPointGraph />
+        {/* 02 */} <Me />
+        {/* 03 */} <Recognition />
+        {/* 04 */} <TimeCost />
+        {/* 05 */} <Shadow />
         {/* 06 */} <Method />
-        {/* 07 */} <ShadowAI />
-        {/* 08 */} <DataFrontier />
-        {/* 09 */} <SensitiveData />
-        {/*    */} <Positioning />
-        {/* 10 */} <TwoQuestions />
-        {/* 11 */} <Architecture />
-        {/*    */} <FounderInterlude />
-        {/* 12 */} <PrivateAI />
-        {/* 13 */} <UseCases />
-        {/* 14 */} <CapacityComparison />
-        {/* 15 */} <DiagnosticCTA />
-        {/* 16 */} <NextStep />
-        {/* 17 */} <WhyNoPrice />
-        {/* 18 */} <FinalManifesto />
-        {/*    */} <FounderClose />
+        {/* 07 */} <PrivateAI />
+        {/* 08 */} <NoPrice />
+        {/* 09 */} <DiagnosticCTA />
       </main>
 
       <Footer />

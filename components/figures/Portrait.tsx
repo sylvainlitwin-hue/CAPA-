@@ -1,10 +1,10 @@
 import Image from 'next/image';
-import { founderVoice } from '@/content/site';
+import { me } from '@/content/site';
 
 /**
- * Portrait du fondateur.
+ * Portrait.
  *
- * Tant que `founderVoice.portrait.src` vaut `null`, on affiche un emplacement
+ * Tant que `me.portrait.src` vaut `null`, on affiche un emplacement
  * réservé : c'est la convention d'une maquette d'imprimeur — cadre au bon
  * format, diagonales, repères de montage, et le chemin du fichier attendu.
  * Aucun visage n'est inventé, aucune image n'est générée.
@@ -13,7 +13,7 @@ import { founderVoice } from '@/content/site';
  * `public/images/fondateur.jpg` puis renseigner `src` dans content/site.ts.
  */
 export function Portrait({ small = false }: { small?: boolean }) {
-  const { src, alt, expectedPath, ratio } = founderVoice.portrait;
+  const { src, alt, expectedPath, ratio } = me.portrait;
 
   if (src) {
     return (
@@ -34,7 +34,7 @@ export function Portrait({ small = false }: { small?: boolean }) {
       className="relative w-full bg-paper-deep"
       style={{ aspectRatio: '4 / 5' }}
       role="img"
-      aria-label={`Emplacement réservé pour le portrait du fondateur (${expectedPath}).`}
+      aria-label={`Emplacement réservé pour le portrait (${expectedPath}).`}
     >
       <svg
         viewBox="0 0 400 500"

@@ -1,18 +1,35 @@
-import { businessCase } from '@/content/site';
+import { timeCost } from '@/content/site';
 
 /**
- * Dérivations de l'exemple illustratif du Point CAPA. Un seul endroit pour
- * le calcul : les chiffres affichés, le graphique et le texte ne peuvent pas
- * se contredire.
+ * Les deux calculs de la page, dérivés une seule fois.
  *
- * ⚠ Ce ne sont pas des tarifs. L'investissement est un ordre de grandeur
- * d'exemple servant à montrer la forme du raisonnement.
+ * ⚠ Ce ne sont pas des tarifs : ce sont des ordres de grandeur illustratifs
+ * servant à montrer la forme du raisonnement. Les mentions « exemple
+ * illustratif » affichées à l'écran ne doivent pas être retirées.
  */
-const { investment, monthlyValue, horizonMonths } = businessCase.chart;
+
+/* ── § 04 — Ce que coûtent 15 minutes ──────────────────────────────────── */
+
+const { minutes, perDay, daysPerYear, hourlyRate } = timeCost.params;
+const hoursPerYear = (minutes * perDay * daysPerYear) / 60;
+
+export const timeMath = {
+  minutes,
+  perDay,
+  daysPerYear,
+  hourlyRate,
+  /** 15 × 10 × 220 / 60 = 550 heures par an. */
+  hoursPerYear,
+  /** 550 × 30 = 16 500 € par an. */
+  costPerYear: hoursPerYear * hourlyRate,
+} as const;
+
+/* ── § 04 — Le Point CAPA ──────────────────────────────────────────────── */
+
+const { investment, monthlyValue, horizonMonths } = timeCost.capaPoint.chart;
 
 export const capaMath = {
   investment,
-  /** Valeur mensuelle récupérée. */
   monthlyValue,
   horizonMonths,
   /** POINT CAPA : mois où la valeur cumulée compense l'investissement. */

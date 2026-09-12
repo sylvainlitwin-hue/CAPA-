@@ -1,9 +1,16 @@
 import { Reveal } from '@/components/ui/Reveal';
 import { Section, SectionFoot, SectionHeader } from '@/components/ui/Section';
-import { diagnostic, links } from '@/content/site';
+import { brand, cta, links, start } from '@/content/site';
 
 const isExternal = (href: string) => /^https?:\/\//.test(href);
 
+/**
+ * § 09 — Commencez simplement.
+ *
+ * L'unique appel à l'action de la page, en grand. Trois refus explicites
+ * (aucun document, aucun accès, aucune donnée client) lèvent la dernière
+ * objection. La page se ferme sur la signature.
+ */
 export function DiagnosticCTA() {
   const href = links.diagnostic.href;
   const external = isExternal(href);
@@ -12,80 +19,50 @@ export function DiagnosticCTA() {
   return (
     <Section id="diagnostic" invert>
       <div className="shell">
-        <SectionHeader
-          index={diagnostic.index}
-          label={diagnostic.sectionLabel}
-          note={diagnostic.note}
-          invert
-        />
+        <SectionHeader index={start.index} label={start.sectionLabel} note={start.note} invert />
 
         <div className="grid12 pt-10 md:pt-16">
-          <div className="col-span-4 md:col-span-8">
+          <div className="col-span-4 md:col-span-7">
             <h3 className="display display-xl">
-              <Reveal>{diagnostic.title}</Reveal>
+              <Reveal>{start.title}</Reveal>
             </h3>
             <Reveal delay={160} className="mt-6 md:mt-10">
-              <p className="body-text max-w-measure text-paper/75">{diagnostic.text}</p>
+              <p className="display display-sm font-normal text-paper/80">{start.lines[0]}</p>
             </Reveal>
           </div>
 
-          {/* ── Ce que le diagnostic ne demande pas ──────────────────────── */}
-          <div className="col-span-4 mt-10 md:col-span-3 md:col-start-10 md:mt-2">
-            <Reveal delay={200}>
-              <span className="label text-paper/55">Ne demande pas</span>
-              <ul className="mt-4">
-                {diagnostic.excludes.map((item) => (
-                  <li
-                    key={item}
-                    className="flex items-baseline gap-3 border-t border-rule-invert py-3"
-                  >
+          {/* Ce que je ne vous demande pas. */}
+          <div className="col-span-4 mt-10 md:col-span-4 md:col-start-9 md:mt-2">
+            <ul>
+              {start.excludes.map((item, i) => (
+                <li key={item} className="border-t border-rule-invert">
+                  <Reveal delay={i * 80} className="flex items-baseline gap-3 py-3.5">
                     <span aria-hidden="true" className="label text-signal">
                       ✕
                     </span>
-                    <span className="label leading-relaxed text-paper">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
+                    <span className="display display-sm text-paper">{item}</span>
+                  </Reveal>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 
-        {/* ── Ce qu'il demande ─────────────────────────────────────────────── */}
-        <div className="mt-14 border-t border-rule-invert pt-3 md:mt-20">
-          <span className="label text-paper/55">{diagnostic.includesLabel}</span>
-          {/* Un tableau réglé, pas des pastilles. Sur fond graphite, le bleu
-              technique ne passe pas le contraste AA en petit corps : on
-              inverse l'emphase. */}
-          <ul className="mt-5 grid grid-cols-2 border-t border-rule-invert md:grid-cols-6">
-            {diagnostic.includes.map((item, i) => (
-              <li
-                key={item}
-                className="border-b border-rule-invert md:border-b-0 md:border-l md:border-rule-invert md:first:border-l-0"
-              >
-                <Reveal delay={i * 50} className="flex items-baseline gap-2 py-4 md:px-3">
-                  <span className="label text-paper">{String(i + 1).padStart(2, '0')}</span>
-                  <span className="label text-paper/70">{item}</span>
-                </Reveal>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* ── Appel à l'action ─────────────────────────────────────────────── */}
-        <div className="pb-16 pt-12 md:pb-24 md:pt-20">
+        {/* ── L'appel à l'action ───────────────────────────────────────────── */}
+        <div className="pt-12 md:pt-20">
           <Reveal>
             <a
               href={href}
               {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
               className="group flex items-center justify-between gap-6 border-2 border-paper px-5 py-8 transition-colors hover:bg-paper hover:text-ink md:px-8 md:py-14"
             >
-              <span className="display display-lg uppercase">{diagnostic.cta.label}</span>
+              <span className="display display-lg uppercase">{cta.label}</span>
               <span aria-hidden="true" className="display display-lg shrink-0">
                 →
               </span>
             </a>
           </Reveal>
-          <p className="label mt-5 text-paper/55">{diagnostic.microcopy}</p>
+          <p className="label mt-5 text-paper/55">{start.microcopy}</p>
 
           {/*
             Branchement Tally : renseigner links.diagnostic.tallyFormId
@@ -104,7 +81,18 @@ export function DiagnosticCTA() {
             </div>
           ) : null}
         </div>
-        <SectionFoot index={diagnostic.index} invert />
+
+        {/* ── Signature ───────────────────────────────────────────────────── */}
+        <div className="pt-16 md:pt-28">
+          <Reveal>
+            <p className="font-semibold leading-[0.78] tracking-tightest text-[clamp(4rem,31vw,30rem)]">
+              {brand.wordmark}
+            </p>
+          </Reveal>
+        </div>
+
+        <div className="h-10 md:h-16" />
+        <SectionFoot index={start.index} invert />
       </div>
     </Section>
   );

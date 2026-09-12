@@ -1,38 +1,40 @@
 import { Reveal } from '@/components/ui/Reveal';
-import { brand, hero } from '@/content/site';
+import { brand, cta, hero } from '@/content/site';
 
+/**
+ * § 01 — L'accroche.
+ *
+ * Deux phrases : le constat qu'il accepte déjà, puis la question qu'il ne
+ * s'est pas posée. La seconde est en bleu — c'est le crochet.
+ */
 export function Hero() {
   return (
     <section id="top" className="relative">
       <div className="shell">
         <div className="grid12 items-start pb-10 pt-10 md:pb-16 md:pt-20">
-          {/* ── Bloc typographique principal ─────────────────────────────── */}
           <div className="col-span-4 md:col-span-8">
             <Reveal className="flex items-baseline gap-3">
               <span className="label text-blue">{hero.index}</span>
               <p className="label text-ink-mute">{hero.kicker}</p>
             </Reveal>
 
-            <h1 className="display display-xl mt-6 md:mt-10">
-              {hero.title.map((line, i) => (
-                <Reveal key={line.text} delay={i * 110} className="block">
-                  {/* L'espace final garde le titre lisible d'un seul tenant
-                      pour les lecteurs d'écran. */}
-                  <span className={line.accent ? 'text-blue' : undefined}>{line.text} </span>
-                </Reveal>
-              ))}
+            <h1 className="mt-6 md:mt-10">
+              <Reveal as="span" className="display display-lg block">
+                {hero.titleA}{' '}
+              </Reveal>
+              <Reveal as="span" delay={140} className="display display-lg mt-6 block text-blue">
+                {hero.titleB}
+              </Reveal>
             </h1>
 
-            <div className="mt-8 grid12 md:mt-12">
-              <Reveal delay={340} className="col-span-4 md:col-span-6">
-                <p className="body-text max-w-measure">{hero.subtitle}</p>
-              </Reveal>
-            </div>
+            <Reveal delay={300} className="mt-8 md:mt-12">
+              <p className="body-text max-w-measure">{hero.subtitle}</p>
+            </Reveal>
 
-            <Reveal delay={420} className="mt-8 md:mt-10">
+            <Reveal delay={380} className="mt-8 md:mt-10">
               <div className="flex flex-col gap-3 sm:flex-row sm:items-stretch">
-                <a href={hero.primaryCta.href} className="btn btn-primary">
-                  {hero.primaryCta.label}
+                <a href={cta.href} className="btn btn-primary">
+                  {cta.label}
                   <span aria-hidden="true">→</span>
                 </a>
                 <a href={hero.secondaryCta.href} className="btn btn-ghost">
@@ -40,16 +42,15 @@ export function Hero() {
                   <span aria-hidden="true">↓</span>
                 </a>
               </div>
-              <p className="label mt-4 text-ink-mute">{hero.microcopy}</p>
+              <p className="label mt-4 text-ink-mute">{cta.microcopy}</p>
             </Reveal>
           </div>
 
-          {/* ── Fiche technique ──────────────────────────────────────────── */}
-          <div className="col-span-4 mt-12 md:col-span-4 md:mt-2">
+          {/* ── Ce que je regarde : un tableau, pas une promesse ─────────── */}
+          <div className="col-span-4 mt-12 md:col-span-3 md:col-start-10 md:mt-2">
             <Reveal delay={200}>
-              {/* Tableau technique : filets, pas de caisson. */}
               <div className="border-t-2 border-ink">
-                <div className="flex items-baseline justify-between bg-ink px-2 py-2.5 text-paper">
+                <div className="flex items-baseline justify-between gap-3 bg-ink px-2 py-2.5 text-paper">
                   <span className="label">{hero.panel.title}</span>
                   <span className="label text-paper/55">{hero.panel.ref}</span>
                 </div>
@@ -77,14 +78,6 @@ export function Hero() {
                   </span>
                 </div>
               </div>
-            </Reveal>
-
-            {/* Le principe commercial, posé dès le premier écran. */}
-            <Reveal delay={300} className="mt-8 border-t-2 border-ink pt-4 md:mt-10">
-              <span className="label text-blue">{hero.principle.label}</span>
-              <p className="display display-sm mt-3 max-w-measure-sm font-medium">
-                {hero.principle.text}
-              </p>
             </Reveal>
           </div>
         </div>

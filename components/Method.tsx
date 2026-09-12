@@ -2,27 +2,28 @@ import { Reveal } from '@/components/ui/Reveal';
 import { Section, SectionFoot, SectionHeader } from '@/components/ui/Section';
 import { method } from '@/content/site';
 
+/**
+ * § 06 — Ma méthode.
+ *
+ * Trois étapes, présentées comme un diagramme de processus : les repères de
+ * la ligne restent hors du masque d'apparition (un clip-path couperait ce
+ * qui dépasse). La dernière réponse possible est « rien de plus ».
+ */
 export function Method() {
   return (
     <Section id="methode">
       <div className="shell">
-        <SectionHeader index={method.index} label={method.sectionLabel} note="PROCESSUS / 4 ÉTAPES" />
+        <SectionHeader index={method.index} label={method.sectionLabel} note={method.note} />
 
         <div className="grid12 pt-10 md:pt-16">
           <div className="col-span-4 md:col-span-9">
-            <h3 className="display display-lg">
-              <Reveal className="block">{method.title[0]} </Reveal>
-              <Reveal delay={120} className="block text-blue">
-                {method.title[1]}
-              </Reveal>
+            <h3 className="display display-xl">
+              <Reveal>{method.title}</Reveal>
             </h3>
           </div>
         </div>
 
-        {/* ── Diagramme de processus ──────────────────────────────────────── */}
-        <ol className="mt-14 grid grid-cols-1 gap-y-10 md:mt-24 md:grid-cols-4 md:gap-x-6 md:gap-y-0">
-          {/* Les repères de la ligne de processus restent hors du masque
-              d'apparition : un clip-path couperait ce qui dépasse. */}
+        <ol className="mt-14 grid grid-cols-1 gap-y-10 md:mt-24 md:grid-cols-3 md:gap-x-6 md:gap-y-0">
           {method.steps.map((step, i) => (
             <li key={step.n} className="relative border-t-2 border-ink pt-5">
               <span aria-hidden="true" className="absolute -top-[7px] left-0 h-3 w-3 bg-ink" />
@@ -37,35 +38,32 @@ export function Method() {
 
               <Reveal delay={i * 110}>
                 <span className="figure-lg block text-blue">{step.n}</span>
-                <h4 className="display display-sm mt-4 uppercase">{step.title}</h4>
-                <p className="body-text mt-3 max-w-measure-sm">{step.text}</p>
-                <div className="mt-6 border-t border-rule pt-2">
-                  <span className="label text-ink-mute">{step.tag}</span>
-                </div>
+                <h4 className="display display-md mt-4 uppercase">{step.title}</h4>
+                <p className="body-text mt-4 max-w-measure-sm">{step.text}</p>
               </Reveal>
             </li>
           ))}
         </ol>
 
-        <div className="flex justify-end pt-10 md:pt-14">
-          <Reveal delay={200}>
-            <p className="label max-w-[40ch] leading-relaxed text-ink-soft md:text-right">
-              {method.flowNote}
-            </p>
-          </Reveal>
+        {/* ── Aucun dogme : parfois, rien de plus ───────────────────────── */}
+        <div className="grid12 pb-14 pt-16 md:pb-20 md:pt-28">
+          <div className="col-span-4 md:col-span-8 md:col-start-3">
+            {method.answers.map((answer, i) => {
+              const last = i === method.answers.length - 1;
+              return (
+                <Reveal
+                  as="p"
+                  key={answer}
+                  delay={i * 100}
+                  className={`display display-md ${last ? 'mt-4 text-blue' : ''}`}
+                >
+                  {answer}
+                </Reveal>
+              );
+            })}
+          </div>
         </div>
 
-        {/* ── L'engagement : prescripteur avant vendeur ─────────────────── */}
-        <div className="grid12 pb-14 pt-14 md:pb-20 md:pt-24">
-          <div className="col-span-4 md:col-span-2">
-            <span className="label text-blue">{method.promise.label}</span>
-          </div>
-          <div className="col-span-4 mt-4 border-t-2 border-ink pt-6 md:col-span-9 md:col-start-4 md:mt-0">
-            <p className="display display-md">
-              <Reveal>{method.promise.text}</Reveal>
-            </p>
-          </div>
-        </div>
         <SectionFoot index={method.index} />
       </div>
     </Section>
