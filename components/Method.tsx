@@ -3,11 +3,12 @@ import { Section, SectionFoot, SectionHeader } from '@/components/ui/Section';
 import { method } from '@/content/site';
 
 /**
- * § 06 — Ma méthode.
+ * § 04 — Ma méthode.
  *
- * Trois étapes, présentées comme un diagramme de processus : les repères de
- * la ligne restent hors du masque d'apparition (un clip-path couperait ce
- * qui dépasse). La dernière réponse possible est « rien de plus ».
+ * Trois étapes en diagramme de processus (les repères de la ligne restent
+ * hors du masque d'apparition : un clip-path couperait ce qui dépasse), puis
+ * les réponses possibles — dont la dernière, la plus importante, en corps
+ * maximal : parfois l'investissement ne vaut pas le coup.
  */
 export function Method() {
   return (
@@ -17,8 +18,11 @@ export function Method() {
 
         <div className="grid12 pt-10 md:pt-16">
           <div className="col-span-4 md:col-span-9">
-            <h3 className="display display-xl">
-              <Reveal>{method.title}</Reveal>
+            <h3 className="display display-lg">
+              <Reveal className="block">{method.title[0]} </Reveal>
+              <Reveal delay={120} className="block text-blue">
+                {method.title[1]}
+              </Reveal>
             </h3>
           </div>
         </div>
@@ -45,25 +49,25 @@ export function Method() {
           ))}
         </ol>
 
-        {/* ── Aucun dogme : parfois, rien de plus ───────────────────────── */}
-        <div className="grid12 pb-14 pt-16 md:pb-20 md:pt-28">
-          <div className="col-span-4 md:col-span-8 md:col-start-3">
-            {method.answers.map((answer, i) => {
-              const last = i === method.answers.length - 1;
-              return (
-                <Reveal
-                  as="p"
-                  key={answer}
-                  delay={i * 100}
-                  className={`display display-md ${last ? 'mt-4 text-blue' : ''}`}
-                >
-                  {answer}
-                </Reveal>
-              );
-            })}
+        {/* ── Les réponses possibles ────────────────────────────────────── */}
+        <div className="grid12 pt-16 md:pt-28">
+          <div className="col-span-4 md:col-span-5">
+            {method.answers.map((answer, i) => (
+              <Reveal as="p" key={answer} delay={i * 90} className="display display-sm text-ink-soft">
+                {answer}
+              </Reveal>
+            ))}
+          </div>
+
+          {/* Le verdict : c'est la phrase qui crée la confiance. */}
+          <div className="col-span-4 mt-10 md:col-span-6 md:col-start-7 md:mt-0">
+            <Reveal delay={200} className="border-t-2 border-blue pt-6">
+              <p className="display display-lg text-blue">{method.verdict}</p>
+            </Reveal>
           </div>
         </div>
 
+        <div className="h-14 md:h-20" />
         <SectionFoot index={method.index} />
       </div>
     </Section>

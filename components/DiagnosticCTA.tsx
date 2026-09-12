@@ -5,7 +5,7 @@ import { brand, cta, links, start } from '@/content/site';
 const isExternal = (href: string) => /^https?:\/\//.test(href);
 
 /**
- * § 09 — Commencez simplement.
+ * § 08 — Commencez par mesurer.
  *
  * L'unique appel à l'action de la page, en grand. Trois refus explicites
  * (aucun document, aucun accès, aucune donnée client) lèvent la dernière
@@ -27,7 +27,7 @@ export function DiagnosticCTA() {
               <Reveal>{start.title}</Reveal>
             </h3>
             <Reveal delay={160} className="mt-6 md:mt-10">
-              <p className="display display-sm font-normal text-paper/80">{start.lines[0]}</p>
+              <p className="display display-sm font-normal text-paper/80">{start.text}</p>
             </Reveal>
           </div>
 
@@ -83,9 +83,9 @@ export function DiagnosticCTA() {
         </div>
 
         {/* ── Signature ───────────────────────────────────────────────────── */}
-        <div className="pt-16 md:pt-28">
+        <div className="pt-14 md:pt-20">
           <Reveal>
-            <p className="font-semibold leading-[0.78] tracking-tightest text-[clamp(4rem,31vw,30rem)]">
+            <p className="font-semibold leading-[0.78] tracking-tightest text-[clamp(3.5rem,24vw,22rem)]">
               {brand.wordmark}
             </p>
           </Reveal>

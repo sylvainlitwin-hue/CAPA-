@@ -3,7 +3,7 @@
 import { capaMath } from '@/lib/capa';
 import { formatFr } from '@/lib/format';
 import { useScrollProgress } from '@/lib/useInView';
-import { timeCost } from '@/content/site';
+import { capaPoint } from '@/content/site';
 
 /**
  * ─────────────────────────────────────────────────────────────────────────────
@@ -17,10 +17,14 @@ import { timeCost } from '@/content/site';
  *  Zone bleue     = valeur nette produite.
  *
  *  Toutes les valeurs proviennent de content/site.ts et sont illustratives.
+ *
+ *  ⚠ Ce graphique n'est plus affiché sur la home : il est conservé pour la
+ *  future page dédiée (méthode ou Private AI). Voir `capaPoint` dans
+ *  content/site.ts.
  * ─────────────────────────────────────────────────────────────────────────────
  */
 
-const { beforeLabel, afterLabel, axisLabel } = timeCost.capaPoint.chart;
+const { beforeLabel, afterLabel, axisLabel } = capaPoint.chart;
 const { investment, horizonMonths, breakevenMonths, netAtHorizon } = capaMath;
 
 type Variant = 'wide' | 'narrow';

@@ -1,10 +1,10 @@
 import Image from 'next/image';
-import { me } from '@/content/site';
+import { founder } from '@/content/site';
 
 /**
  * Portrait.
  *
- * Tant que `me.portrait.src` vaut `null`, on affiche un emplacement
+ * Tant que `founder.portrait.src` vaut `null`, on affiche un emplacement
  * réservé : c'est la convention d'une maquette d'imprimeur — cadre au bon
  * format, diagonales, repères de montage, et le chemin du fichier attendu.
  * Aucun visage n'est inventé, aucune image n'est générée.
@@ -13,7 +13,7 @@ import { me } from '@/content/site';
  * `public/images/fondateur.jpg` puis renseigner `src` dans content/site.ts.
  */
 export function Portrait({ small = false }: { small?: boolean }) {
-  const { src, alt, expectedPath, ratio } = me.portrait;
+  const { src, alt, expectedPath, ratio } = founder.portrait;
 
   if (src) {
     return (

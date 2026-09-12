@@ -1,4 +1,4 @@
-import { timeCost } from '@/content/site';
+import { capaPoint, timeCost } from '@/content/site';
 
 /**
  * Les deux calculs de la page, dérivés une seule fois.
@@ -8,7 +8,7 @@ import { timeCost } from '@/content/site';
  * illustratif » affichées à l'écran ne doivent pas être retirées.
  */
 
-/* ── § 04 — Ce que coûtent 15 minutes ──────────────────────────────────── */
+/* ── § 03 — Ce que coûtent 15 minutes ──────────────────────────────────── */
 
 const { minutes, perDay, daysPerYear, hourlyRate } = timeCost.params;
 const hoursPerYear = (minutes * perDay * daysPerYear) / 60;
@@ -28,6 +28,12 @@ export const timeMath = {
   hoursPerYear,
   /** 550 × 30 = 16 500 € par an. */
   costPerYear: hoursPerYear * hourlyRate,
+
+  /* ── Hors home ─────────────────────────────────────────────────────────
+     Les trois conversions (par jour, par semaine, en fraction de poste)
+     ne sont plus affichées : la home se contente des deux grands chiffres.
+     Elles restent dérivées ici pour la future page méthode. */
+
   /** 550 / 220 = 2,5 h par jour. */
   hoursPerDay: hoursPerYear / daysPerYear,
   /** 220 jours ≈ 44 semaines travaillées, soit 12,5 h par semaine. */
@@ -36,12 +42,17 @@ export const timeMath = {
   fteShare: hoursPerYear / FTE_HOURS_PER_YEAR,
 } as const;
 
-/** Coût annuel d'un temps perdu quotidien, pour un effectif donné. */
+/**
+ * Coût annuel d'un temps perdu quotidien, pour un effectif donné.
+ *
+ * ⚠ Plus utilisé sur la home : l'abaque (12 combinaisons minutes × effectif)
+ * a été retirée. Conservé pour la future page méthode.
+ */
 export function annualCost(minutesPerDay: number, people: number): number {
   return (minutesPerDay / 60) * daysPerYear * people * hourlyRate;
 }
 
-/** « 30 min », « 1 h », « 2 h 30 » — pour les libellés de l'abaque. */
+/** « 30 min », « 1 h », « 2 h 30 » — libellés de l'abaque (hors home). */
 export function formatDuration(minutesTotal: number): string {
   if (minutesTotal < 60) return `${minutesTotal} min`;
   const h = Math.floor(minutesTotal / 60);
@@ -49,9 +60,11 @@ export function formatDuration(minutesTotal: number): string {
   return m === 0 ? `${h} h` : `${h} h ${m}`;
 }
 
-/* ── § 04 — Le Point CAPA ──────────────────────────────────────────────── */
+/* ── Hors home — Le Point CAPA ─────────────────────────────────────────── */
 
-const { investment, monthlyValue, horizonMonths } = timeCost.capaPoint.chart;
+/* Conservé pour la future page dédiée : le graphique n'est plus sur la home. */
+
+const { investment, monthlyValue, horizonMonths } = capaPoint.chart;
 
 export const capaMath = {
   investment,

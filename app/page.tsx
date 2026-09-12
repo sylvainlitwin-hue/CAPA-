@@ -1,25 +1,23 @@
-import { Benchmarks } from '@/components/Benchmarks';
+import { Control } from '@/components/Control';
 import { DiagnosticCTA } from '@/components/DiagnosticCTA';
 import { Footer } from '@/components/Footer';
 import { Hero } from '@/components/Hero';
-import { Me } from '@/components/Me';
 import { Method } from '@/components/Method';
 import { Navigation } from '@/components/Navigation';
-import { NoPrice } from '@/components/NoPrice';
 import { PrivateAI } from '@/components/PrivateAI';
 import { Recognition } from '@/components/Recognition';
-import { Shadow } from '@/components/Shadow';
 import { TimeCost } from '@/components/TimeCost';
+import { Why } from '@/components/Why';
 import { GridOverlay } from '@/components/ui/GridOverlay';
 
 /**
- * Dix sections, un seul lecteur : un dirigeant de PME.
+ * Huit sections, un seul lecteur : un dirigeant de PME.
  *
- * 01 ce qu'il sait / ce qu'il ne sait pas · 02 qui lui parle ·
- * 03 la reconnaissance · 04 l'arithmétique (chiffres calculés) ·
- * 05 l'IA déjà présente · 06 les repères (statistiques sourcées) ·
- * 07 la méthode · 08 sa propre IA · 09 pas de prix avant le problème ·
- * 10 l'unique appel à l'action.
+ * La home ne raconte pas tout le business. Elle fait reconnaître le
+ * problème (01–02), montre qu'il coûte de l'argent (03), introduit une
+ * approche différente (04–06), donne confiance (07) et pousse vers le
+ * diagnostic (08). Le reste — prix, offres, architecture, détails
+ * techniques, statistiques de marché — appartient à une page dédiée.
  */
 export default function Page() {
   return (
@@ -35,15 +33,13 @@ export default function Page() {
 
       <main>
         {/* 01 */} <Hero />
-        {/* 02 */} <Me />
-        {/* 03 */} <Recognition />
-        {/* 04 */} <TimeCost />
-        {/* 05 */} <Shadow />
-        {/* 06 */} <Benchmarks />
-        {/* 07 */} <Method />
-        {/* 08 */} <PrivateAI />
-        {/* 09 */} <NoPrice />
-        {/* 10 */} <DiagnosticCTA />
+        {/* 02 */} <Recognition />
+        {/* 03 */} <TimeCost />
+        {/* 04 */} <Method />
+        {/* 05 */} <Control />
+        {/* 06 */} <PrivateAI />
+        {/* 07 */} <Why />
+        {/* 08 */} <DiagnosticCTA />
       </main>
 
       <Footer />
