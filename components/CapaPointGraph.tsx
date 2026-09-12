@@ -6,16 +6,51 @@ import { capaMath } from '@/lib/capa';
 import { formatFr } from '@/lib/format';
 import { businessCase } from '@/content/site';
 
+/**
+ * § 05 — Le Point CAPA.
+ *
+ * Cette section explique une philosophie de travail, pas une offre : trois
+ * chiffres d'ordre de grandeur, le tracé, et rien qui ressemble à un devis.
+ */
+function KeyFigure({
+  label,
+  value,
+  unit,
+  decimals = 0,
+  prefix,
+  accent = false,
+  delay = 0,
+}: {
+  label: string;
+  value: number;
+  unit: string;
+  decimals?: number;
+  prefix?: string;
+  accent?: boolean;
+  delay?: number;
+}) {
+  return (
+    <Reveal as="div" delay={delay} className="border-t-2 border-ink pt-4">
+      <span className="label text-ink-soft">{label}</span>
+      <p className={`figure-xl mt-4 ${accent ? 'text-blue' : ''}`}>
+        {prefix ? <span aria-hidden="true">{prefix}</span> : null}
+        <CountUp value={value} decimals={decimals} duration={decimals ? 1400 : 1100} />
+      </p>
+      <span className="label mt-3 block text-ink">{unit}</span>
+    </Reveal>
+  );
+}
+
 export function CapaPointGraph() {
-  const { breakeven, chart } = businessCase;
+  const { chart, figures } = businessCase;
 
   return (
-    <Section id="business-case" className="graph-paper">
+    <Section id="point-capa" className="graph-paper">
       <div className="shell">
         <SectionHeader
           index={businessCase.index}
           label={businessCase.sectionLabel}
-          note="CAS ILLUSTRATIF"
+          note={businessCase.note}
         />
 
         <div className="grid12 pt-10 md:pt-16">
@@ -34,63 +69,47 @@ export function CapaPointGraph() {
           </div>
         </div>
 
-        {/* ── Bandeau du cas ──────────────────────────────────────────────── */}
-        <div className="mt-12 flex flex-col gap-1 border-y border-[var(--rule-strong)] py-3 md:mt-20 md:flex-row md:items-baseline md:justify-between md:gap-4">
+        {/* ── La philosophie, énoncée avant tout chiffre ─────────────────── */}
+        <div className="grid12 pt-12 md:pt-20">
+          <div className="col-span-4 md:col-span-8 md:col-start-3">
+            <Reveal>
+              <p className="display display-md">{businessCase.philosophy}</p>
+            </Reveal>
+          </div>
+        </div>
+
+        {/* ── Trois ordres de grandeur ──────────────────────────────────── */}
+        <div className="mt-14 flex items-baseline justify-between gap-4 border-b border-[var(--rule-strong)] pb-3 md:mt-24">
           <span className="label text-blue">
             {businessCase.caseLabel} <span aria-hidden="true">✳</span>
           </span>
-          <span className="label text-ink">{businessCase.caseRef}</span>
+          <span className="label hidden text-ink-mute md:block">
+            {chart.name} / {chart.nameEn}
+          </span>
         </div>
 
-        <div className="grid12">
-          {/* ── Relevé chiffré ──────────────────────────────────────────── */}
-          <dl className="col-span-4 md:col-span-5">
-            {/* Colonnes fixes : les chiffres s'alignent sur un même fer à
-                droite, les unités sur un même fer à gauche. */}
-            {businessCase.rows.map((row, i) => (
-              <Reveal
-                as="div"
-                key={row.label}
-                delay={i * 60}
-                className="grid grid-cols-[1fr_auto_4.5rem] items-baseline gap-x-3 border-b border-rule py-4 md:gap-x-4 md:py-5"
-              >
-                <dt className="label max-w-[16ch] leading-relaxed text-ink-soft md:max-w-[20ch]">
-                  {row.label}
-                </dt>
-                <dd className="figure-lg text-right">
-                  <CountUp value={row.value} />
-                </dd>
-                <dd className="label text-ink-mute">{row.unit}</dd>
-              </Reveal>
-            ))}
-          </dl>
+        <div className="grid grid-cols-1 gap-x-6 gap-y-10 pt-8 sm:grid-cols-3 md:pt-12">
+          <KeyFigure label={figures.investment} value={capaMath.investment} unit="€" />
+          <KeyFigure
+            label={figures.monthly}
+            value={capaMath.monthlyValue}
+            unit="€ / mois"
+            delay={120}
+          />
+          <KeyFigure
+            label={figures.breakeven}
+            value={capaMath.breakevenMonths}
+            decimals={1}
+            prefix="≈ "
+            unit="mois"
+            accent
+            delay={240}
+          />
+        </div>
 
-          {/* ── Point de rentabilité ────────────────────────────────────── */}
-          <div className="col-span-4 mt-12 md:col-span-6 md:col-start-7 md:mt-4">
-            <Reveal>
-              <span className="label text-ink-soft">{breakeven.label}</span>
-            </Reveal>
-            <Reveal delay={120} className="mt-4 flex items-baseline gap-4">
-              <span className="figure-xl text-blue">
-                <CountUp value={breakeven.value} decimals={1} duration={1400} />
-              </span>
-              <span className="label text-ink">{breakeven.unit}</span>
-            </Reveal>
-
-            <Reveal mode="rule-x" delay={240} className="mt-6 h-[2px] w-full bg-ink md:mt-8">
-              <span className="sr-only" />
-            </Reveal>
-
-            <Reveal delay={300} className="mt-4">
-              <div className="flex items-baseline gap-3">
-                <span className="label text-blue">{chart.name}</span>
-                <span className="label text-ink-mute">/ {chart.nameEn}</span>
-              </div>
-              <p className="body-text mt-3 max-w-measure">{chart.definition}</p>
-            </Reveal>
-
-            {/* Le calcul est écrit en clair : rien à croire sur parole. */}
-            <Reveal delay={360} className="mt-8 border-t border-rule pt-4 md:mt-10">
+        <div className="grid12 pt-10 md:pt-14">
+          <div className="col-span-4 md:col-span-6">
+            <Reveal delay={120} className="border-t border-rule pt-4">
               <span className="label text-ink-mute">Calcul</span>
               <p className="mt-3 font-mono text-[clamp(0.9375rem,1.2vw,1.1875rem)] leading-relaxed">
                 {formatFr(capaMath.investment)} €
@@ -99,6 +118,12 @@ export function CapaPointGraph() {
                 <span className="text-blue"> = </span>
                 {formatFr(capaMath.breakevenMonths, 1)} mois
               </p>
+            </Reveal>
+          </div>
+          <div className="col-span-4 mt-8 md:col-span-5 md:col-start-8 md:mt-0">
+            <Reveal delay={200} className="border-t border-rule pt-4">
+              <span className="label text-blue">{chart.name}</span>
+              <p className="body-text mt-3 max-w-measure">{chart.definition}</p>
             </Reveal>
           </div>
         </div>
@@ -133,8 +158,7 @@ export function CapaPointGraph() {
               </li>
             </ul>
             <p className="label max-w-[44ch] leading-relaxed text-ink-mute md:text-right">
-              Hypothèses : investissement {formatFr(capaMath.investment)} €, valeur récupérée{' '}
-              {formatFr(capaMath.monthlyValue)} € / mois. {businessCase.disclaimer}
+              {businessCase.disclaimer}
             </p>
           </div>
         </div>

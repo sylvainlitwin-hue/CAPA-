@@ -47,12 +47,24 @@ export function Method() {
           ))}
         </ol>
 
-        <div className="flex justify-end pb-14 pt-10 md:pb-20 md:pt-14">
+        <div className="flex justify-end pt-10 md:pt-14">
           <Reveal delay={200}>
             <p className="label max-w-[40ch] leading-relaxed text-ink-soft md:text-right">
               {method.flowNote}
             </p>
           </Reveal>
+        </div>
+
+        {/* ── L'engagement : prescripteur avant vendeur ─────────────────── */}
+        <div className="grid12 pb-14 pt-14 md:pb-20 md:pt-24">
+          <div className="col-span-4 md:col-span-2">
+            <span className="label text-blue">{method.promise.label}</span>
+          </div>
+          <div className="col-span-4 mt-4 border-t-2 border-ink pt-6 md:col-span-9 md:col-start-4 md:mt-0">
+            <p className="display display-md">
+              <Reveal>{method.promise.text}</Reveal>
+            </p>
+          </div>
         </div>
         <SectionFoot index={method.index} />
       </div>

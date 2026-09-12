@@ -89,8 +89,45 @@ export function ShadowAI() {
               </Reveal>
             </div>
           </div>
-          <SectionFoot index={shadowAi.index} invert />
         </div>
+      </div>
+
+      {/* ── Le cadre : ce qu'une entreprise doit trancher ───────────────── */}
+      <div className="shell">
+        <div className="grid12 pt-14 md:pt-24">
+          <div className="col-span-4 md:col-span-2">
+            <span className="label text-blue">{shadowAi.framework.label}</span>
+            <span className="label mt-2 block text-ink-mute">{shadowAi.framework.name}</span>
+          </div>
+          <div className="col-span-4 mt-6 md:col-span-9 md:col-start-4 md:mt-0">
+            <h4 className="display display-md">
+              <Reveal>{shadowAi.framework.title}</Reveal>
+            </h4>
+
+            <ul className="mt-8 grid grid-cols-1 border-b-2 border-ink md:grid-cols-2 md:gap-x-12">
+              {shadowAi.framework.items.map((item, i) => (
+                <li
+                  key={item}
+                  className="border-t border-rule first:border-[var(--rule-strong)] md:[&:nth-child(2)]:border-[var(--rule-strong)]"
+                >
+                  <Reveal delay={(i % 5) * 50} className="flex items-baseline gap-4 py-3">
+                    <span className="label w-6 shrink-0 text-ink-mute">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <span className="text-[1rem] leading-snug">{item}</span>
+                  </Reveal>
+                </li>
+              ))}
+            </ul>
+
+            <Reveal delay={200} className="mt-8 md:mt-10">
+              <p className="display display-md text-blue">{shadowAi.framework.benefit}</p>
+            </Reveal>
+          </div>
+        </div>
+
+        <div className="h-16 md:h-24" />
+        <SectionFoot index={shadowAi.index} />
       </div>
     </Section>
   );

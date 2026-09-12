@@ -7,17 +7,18 @@ import { DiagnosticCTA } from '@/components/DiagnosticCTA';
 import { FinalManifesto } from '@/components/FinalManifesto';
 import { Footer } from '@/components/Footer';
 import { FounderClose, FounderInterlude, FounderIntro } from '@/components/FounderVoice';
-import { FounderOffer } from '@/components/FounderOffer';
 import { Hero } from '@/components/Hero';
 import { Manifesto } from '@/components/Manifesto';
 import { Method } from '@/components/Method';
 import { Navigation } from '@/components/Navigation';
+import { NextStep } from '@/components/NextStep';
 import { Positioning } from '@/components/Positioning';
 import { PrivateAI } from '@/components/PrivateAI';
 import { SensitiveData } from '@/components/SensitiveData';
 import { ShadowAI } from '@/components/ShadowAI';
 import { TwoQuestions } from '@/components/TwoQuestions';
 import { UseCases } from '@/components/UseCases';
+import { WhyNoPrice } from '@/components/WhyNoPrice';
 import { GridOverlay } from '@/components/ui/GridOverlay';
 
 /**
@@ -27,6 +28,10 @@ import { GridOverlay } from '@/components/ui/GridOverlay';
  * s'établit (03 → 06), le risque de gouvernance est posé (07 → 11), une
  * dernière parole humaine précède l'infrastructure, qui n'arrive qu'en
  * conséquence (12). Les blocs sans numéro sont des pages de respiration.
+ *
+ * Aucun prix n'est affiché : tout converge vers le diagnostic (15), la
+ * recommandation vient après (16), et l'absence de tarif standard est
+ * assumée et expliquée (17).
  */
 export default function Page() {
   return (
@@ -58,8 +63,9 @@ export default function Page() {
         {/* 13 */} <UseCases />
         {/* 14 */} <CapacityComparison />
         {/* 15 */} <DiagnosticCTA />
-        {/* 16 */} <FounderOffer />
-        {/* 17 */} <FinalManifesto />
+        {/* 16 */} <NextStep />
+        {/* 17 */} <WhyNoPrice />
+        {/* 18 */} <FinalManifesto />
         {/*    */} <FounderClose />
       </main>
 

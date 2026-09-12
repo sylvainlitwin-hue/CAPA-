@@ -2,10 +2,18 @@
 
 **Plus de capacité. Pas nécessairement plus de salariés.**
 
-Landing page de l’offre CAPA — intelligence artificielle privée pour les PME
-françaises. Next.js 15 (App Router) · TypeScript · Tailwind CSS. Aucune
-bibliothèque d’animation : les micro-interactions sont en CSS + un observateur
+Landing page CAPA — intelligence artificielle privée pour les PME françaises.
+Next.js 15 (App Router) · TypeScript · Tailwind CSS. Aucune bibliothèque
+d’animation : les micro-interactions sont en CSS + un observateur
 d’intersection de quelques lignes.
+
+**Règle structurante : aucun prix ne figure sur cette page.** Le parcours est
+intérêt → diagnostic → qualification → recommandation → proposition
+personnalisée. Le diagnostic est la seule porte d’entrée, et l’appel à
+l’action est presque toujours le même : « Évaluer mon entreprise ». Ne pas
+réintroduire de grille tarifaire, de mention « à partir de », ni de « nous
+contacter pour connaître nos tarifs » : la section § 17 explique pourquoi
+il n’existe pas de prix standard.
 
 ```bash
 npm install
@@ -32,12 +40,12 @@ Deux règles à respecter :
    est fait à l’affichage par [`lib/format.ts`](lib/format.ts) — volontairement
    sans `Intl`, pour que le rendu serveur et le rendu navigateur soient
    identiques au caractère près.
-2. **Les chiffres du cas § 04 sont illustratifs** et le seul endroit où le
-   raisonnement est calculé est [`lib/capa.ts`](lib/capa.ts). Le tableau, le
-   graphique, la ligne « Calcul » et la comparaison § 08 lisent tous cette
-   source : ils ne peuvent pas se contredire. Les mentions
-   « Exemple illustratif » sont affichées à l’écran et ne doivent pas être
-   retirées.
+2. **Les chiffres du Point CAPA § 05 sont illustratifs** — ce sont des ordres
+   de grandeur, pas des tarifs — et le seul endroit où le raisonnement est
+   calculé est [`lib/capa.ts`](lib/capa.ts). Les trois chiffres affichés, le
+   graphique et la ligne « Calcul » lisent tous cette source : ils ne peuvent
+   pas se contredire. Les mentions « Exemple illustratif » sont affichées à
+   l’écran et ne doivent pas être retirées.
 
 ### Tester la variante de titre du Hero
 
@@ -58,10 +66,19 @@ export const links = {
 };
 ```
 
-- `href` seul : tous les appels à l’action ouvrent le formulaire Tally
+- `href` seul : tous les appels à l’action (une dizaine sur la page) ouvrent
+  le formulaire Tally
   (le lien externe reçoit automatiquement `target="_blank" rel="noopener"`).
 - `tallyFormId` renseigné : le formulaire est en plus affiché en `iframe`
-  (chargement différé) directement dans la section 09.
+  (chargement différé) directement dans la section 15.
+
+### Le routage après le diagnostic
+
+`nextStep.outcomes` (dans `content/site.ts`) décrit les trois issues annoncées
+sur la page — A faible potentiel, B potentiel intermédiaire, C potentiel élevé
+— avec leur recommandation. Ces trois clés correspondent aux trois sorties à
+câbler dans la logique conditionnelle du formulaire. Aucune des trois ne
+comporte de prix : la proposition chiffrée se fait après l’échange.
 
 ### Remplacer le visuel de la section Private AI
 
@@ -78,7 +95,7 @@ dans `public/images/` et renseigner :
 figure: {
   src: '/images/private-ai.webp', // 4:5, ≥ 1200 px de large, WebP ou AVIF
   alt: '…',
-  caption: 'FIG. 06 — …',
+  caption: '…',
   …
 }
 ```
@@ -121,7 +138,8 @@ toujours tabulaires), `.label` (monospace, capitales, interlettrage 0,14 em).
 
 `.shell` (marges) + `.grid12` : 12 colonnes au-delà de 768 px, 4 colonnes en
 dessous. Chaque section s’ouvre par un filet pleine largeur et une ligne de
-repères `§ 04 — BUSINESS CASE … CAS ILLUSTRATIF`.
+repères `§ 05 — POINT CAPA … PHILOSOPHIE`, et se ferme par un folio
+d’imprimé (`CAPA · RAPPORT D’ORIENTATION 2026 — 05 —`).
 
 **Touche `G` : affiche la grille de contrôle** (outil de vérification des
 alignements, jamais visible sans action de l’utilisateur).
@@ -147,27 +165,35 @@ sur téléphone.
 ```
 app/
   layout.tsx              polices, métadonnées, repli <noscript>
-  page.tsx                assemblage des 12 sections
+  page.tsx                assemblage des 18 sections + 3 interstitiels
   globals.css             design system (palette, échelles, grille, animations)
   mentions-legales/       gabarit légal (à compléter, aucune mention inventée)
   confidentialite/
 components/
   Navigation.tsx          barre collante + repère d’avancement + menu mobile
   Hero.tsx                01 — accroche, fiche technique, principe commercial
-  Manifesto.tsx           02 — ennemi commun, déclaration, 5 règles
-  CostEquation.tsx        03 — coûts invisibles, équation Temps × Fréquence × Coût
-  CapaPointGraph.tsx      04 — business case + POINT CAPA
-  CapaPointChart.tsx      04 — le graphique (SVG, client)
-  Method.tsx              05 — diagramme de processus en 4 étapes
-  PrivateAI.tsx           06 — planche technique + propriété + principes
-  UseCases.tsx            07 — six domaines métier
-  CapacityComparison.tsx  08 — recrutement vs récupération de capacité
-  DiagnosticCTA.tsx       09 — diagnostic (fond graphite) + branchement Tally
-  FounderOffer.tsx        10 — bordereau de l’offre fondateur
-  FinalManifesto.tsx      11 — manifeste et signature
-  Footer.tsx              12 — pied de page + ligne de base
-  figures/                schémas vectoriels
-  ui/                     Section, SectionHeader, Reveal, CountUp, GridOverlay
+  FounderVoice.tsx        02 + 2 interstitiels — la parole du fondateur
+  Manifesto.tsx           03 — ennemi commun, déclaration, 5 règles
+  CostEquation.tsx        04 — coûts invisibles, équation Temps × Fréquence × Coût
+  CapaPointGraph.tsx      05 — Point CAPA : philosophie + 3 ordres de grandeur
+  CapaPointChart.tsx      05 — le graphique (SVG, client)
+  Method.tsx              06 — processus en 4 étapes + engagement de prescripteur
+  ShadowAI.tsx            07 — l’IA déjà présente, SHADOW AI, le cadre
+  DataFrontier.tsx        08 — ce qui peut sortir de l’entreprise
+  SensitiveData.tsx       09 — inventaire des 8 familles de données
+  Positioning.tsx         [interstitiel] — affiche de position
+  TwoQuestions.tsx        10 — valeur / traitement des données
+  Architecture.tsx        11 — local, cloud, hybride
+  PrivateAI.tsx           12 — conséquence : l’infrastructure privée
+  UseCases.tsx            13 — six domaines métier
+  CapacityComparison.tsx  14 — recrutement vs récupération de capacité
+  DiagnosticCTA.tsx       15 — diagnostic (fond graphite) + branchement Tally
+  NextStep.tsx            16 — et ensuite ? + les trois issues du diagnostic
+  WhyNoPrice.tsx          17 — pourquoi aucun prix standard
+  FinalManifesto.tsx      18 — manifeste et signature
+  Footer.tsx              pied de page + ligne de base
+  figures/                portrait du fondateur, schémas vectoriels
+  ui/                     Section, SectionHeader, SectionFoot, Reveal, CountUp
 content/site.ts           ← tout le contenu
 lib/                      format.ts (nombres FR), capa.ts (calcul), useInView.ts
 ```
@@ -211,5 +237,9 @@ les états masqués : le document reste intégralement lisible.
   Aucune information d’entreprise n’a été inventée.
 - Aucun témoignage, aucun logo client, aucune statistique de marché : la page
   ne contient que des chiffres explicitement présentés comme illustratifs.
+- Aucun prix, aucune offre, aucun nombre de places : voir la règle en tête de
+  ce fichier.
+- Le portrait du fondateur est un emplacement réservé jusqu’au dépôt d’une
+  photographie réelle (voir plus haut).
 - L’adresse de contact (`contact@capa.fr`) et l’URL canonique
   (`meta.url` dans `content/site.ts`) sont des valeurs de travail à confirmer.

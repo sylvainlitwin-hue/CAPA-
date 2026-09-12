@@ -11,11 +11,17 @@
  *
  *  ORDRE DE LECTURE DU DOCUMENT
  *  01 Hero · 02 Point de vue (fondateur) · 03 Ennemi commun ·
- *  04 Coûts invisibles · 05 Business case · 06 Méthode ·
+ *  04 Coûts invisibles · 05 Point CAPA · 06 Méthode ·
  *  07 Shadow AI · 08 Frontière · 09 Données sensibles ·
  *  [intertitre] · 10 Deux questions · 11 Architecture · [parole] ·
  *  12 Private AI · 13 Usages · 14 Capacité · 15 Diagnostic ·
- *  16 Offre fondateur · 17 Manifeste · Pied de page
+ *  16 Et ensuite · 17 Pourquoi CAPA · 18 Manifeste · Pied de page
+ *
+ *  AUCUN PRIX NE FIGURE SUR CETTE PAGE.
+ *  Le diagnostic est la seule porte d'entrée ; une recommandation — et
+ *  donc un montant — n'a de sens qu'après avoir compris l'entreprise.
+ *  Voir la section `whyNoPrice`. Ne pas réintroduire de grille tarifaire,
+ *  ni de mention « à partir de », ni de « nous contacter pour les tarifs ».
  * ─────────────────────────────────────────────────────────────────────────────
  */
 
@@ -56,7 +62,6 @@ export const links = {
     /** ex. 'w7XYZ1' — laisser null pour n'afficher que le bouton. */
     tallyFormId: null as string | null,
   },
-  apply: { href: '#offre-fondateur' },
   legal: [
     { label: 'Mentions légales', href: '/mentions-legales' },
     { label: 'Confidentialité', href: '/confidentialite' },
@@ -67,11 +72,11 @@ export const links = {
 export const nav = {
   items: [
     { label: 'Méthode', href: '#methode' },
-    { label: 'Gouvernance', href: '#shadow-ai' },
     { label: 'Private AI', href: '#private-ai' },
+    { label: 'Pourquoi CAPA', href: '#pourquoi-capa' },
     { label: 'Diagnostic', href: '#diagnostic' },
   ],
-  cta: { label: 'Évaluer mon entreprise', href: '#diagnostic' },
+  cta: { label: 'Diagnostic gratuit', href: '#diagnostic' },
 } as const;
 
 /* ── 01 — HERO ────────────────────────────────────────────────────────────── */
@@ -103,7 +108,7 @@ export const hero = {
     label: 'Principe',
     text: 'Avant de vous vendre de l’IA, nous calculons si elle peut réellement vous rapporter davantage qu’elle ne vous coûte.',
   },
-  primaryCta: { label: 'Faire le diagnostic gratuit', href: '#diagnostic' },
+  primaryCta: { label: 'Évaluer mon entreprise', href: '#diagnostic' },
   secondaryCta: { label: 'Comprendre la méthode', href: '#methode' },
   microcopy: '5 minutes · Aucun document confidentiel nécessaire',
   panel: {
@@ -224,32 +229,30 @@ export const hiddenCosts = {
   closing: 'C’est ici que commence notre travail.',
 } as const;
 
-/* ── 05 — BUSINESS CASE / POINT CAPA ─────────────────────────────────────── */
+/* ── 05 — POINT CAPA ─────────────────────────────────────────────────────── */
 
 /**
- * ⚠ DONNÉES STRICTEMENT ILLUSTRATIVES.
- * Elles servent à montrer la forme du raisonnement, pas à promettre un
- * résultat. Le disclaimer est affiché à l'écran et ne doit pas être retiré.
+ * ⚠ CHIFFRES STRICTEMENT ILLUSTRATIFS.
+ * Cette section n'est PAS une grille tarifaire et ne doit jamais servir à
+ * justifier un prix affiché : elle explique la philosophie de travail.
+ * Le montant d'investissement est un ordre de grandeur d'exemple, pas une
+ * offre. La mention « exemple illustratif » est affichée à l'écran et ne
+ * doit pas être retirée.
  */
 export const businessCase = {
   index: '05',
-  sectionLabel: 'Business case',
+  sectionLabel: 'Point CAPA',
+  note: 'PHILOSOPHIE',
   title: 'L’IA doit pouvoir expliquer comment elle compte se rembourser.',
-  caseLabel: 'Cas illustratif',
-  caseRef: 'PME · 14 salariés · services',
-  disclaimer: 'Exemple illustratif — les résultats réels dépendent de chaque entreprise.',
-  rows: [
-    { label: 'Temps identifié', value: 118, unit: 'h / mois' },
-    { label: 'Valeur horaire moyenne', value: 31, unit: '€' },
-    { label: 'Coût théorique étudié', value: 3658, unit: '€ / mois' },
-    { label: 'Capacité raisonnablement récupérable', value: 22, unit: '%' },
-    { label: 'Valeur annuelle potentielle', value: 9657, unit: '€' },
-    { label: 'Investissement initial', value: 4900, unit: '€' },
-  ],
-  breakeven: {
-    label: 'Point de rentabilité estimé',
-    value: 6.1,
-    unit: 'mois',
+  philosophy:
+    'Nous cherchons à estimer le moment où la valeur cumulée créée compense l’investissement.',
+  caseLabel: 'Exemple illustratif',
+  disclaimer: 'Exemple illustratif. Chaque entreprise nécessite sa propre analyse.',
+  /** Libellés des trois chiffres ; les valeurs viennent de lib/capa.ts. */
+  figures: {
+    investment: 'Investissement',
+    monthly: 'Valeur récupérée',
+    breakeven: 'Point CAPA',
   },
   /** Paramètres du graphique propriétaire. */
   chart: {
@@ -257,8 +260,8 @@ export const businessCase = {
     nameEn: 'THE CAPA POINT',
     definition:
       'Le moment estimé où la valeur cumulée récupérée compense l’investissement initial.',
-    investment: 4900,
-    annualValue: 9657,
+    investment: 6000,
+    monthlyValue: 1400,
     horizonMonths: 12,
     beforeLabel: 'Investissement à récupérer',
     afterLabel: 'Valeur nette produite',
@@ -299,6 +302,14 @@ export const method = {
     },
   ],
   flowNote: 'Une étape ne s’ouvre que si la précédente a produit un chiffre.',
+  /**
+   * La phrase de confiance : elle vaut engagement. CAPA est prescripteur
+   * avant d'être vendeur.
+   */
+  promise: {
+    label: 'Engagement',
+    text: 'Si nous considérons qu’un investissement IA n’est pas justifié dans votre situation, nous vous le dirons.',
+  },
 } as const;
 
 /* ── 07 — SHADOW AI ──────────────────────────────────────────────────────── */
@@ -325,6 +336,28 @@ export const shadowAi = {
     label: 'Définition',
     definition:
       'Des usages d’intelligence artificielle réalisés en dehors d’un cadre défini par l’entreprise.',
+  },
+  /**
+   * Le cadre. Présenté comme une grille de décision, pas comme un produit :
+   * ce sont les questions qu'une entreprise doit trancher, quelle que soit
+   * la personne qui l'accompagne.
+   */
+  framework: {
+    label: 'Le cadre',
+    name: 'CAPA AI POLICY',
+    title: 'Ce qu’un cadre défini doit trancher.',
+    items: [
+      'quelles IA sont autorisées',
+      'quels usages sont autorisés',
+      'quelles informations peuvent être envoyées à un service externe',
+      'quelles informations doivent rester privées',
+      'quels utilisateurs ont accès à quoi',
+      'quand une validation humaine est obligatoire',
+      'comment tracer les usages importants',
+      'comment gérer départs et changements de salariés',
+      'comment conserver les connaissances internes',
+    ],
+    benefit: 'Passer de l’IA sauvage à une IA gouvernée.',
   },
 } as const;
 
@@ -570,9 +603,9 @@ export const capacity = {
   },
   right: {
     label: 'Récupération de capacité',
-    value: 4900,
+    value: 6000,
     unit: '€',
-    note: 'Investissement initial de l’exemple § 05.',
+    note: 'Ordre de grandeur d’investissement de l’exemple § 05, à comparer à un coût annuel récurrent.',
   },
   vs: 'VS',
   statement: [
@@ -596,60 +629,101 @@ export const diagnostic = {
   microcopy: 'Gratuit · 5 minutes · Sans engagement',
 } as const;
 
-/* ── 16 — OFFRE FONDATEUR ────────────────────────────────────────────────── */
+/* ── 16 — ET ENSUITE ? ───────────────────────────────────────────────────── */
 
-export const founder = {
+/**
+ * Remplace l'ancienne section d'offre. Aucun prix, aucune formule, aucun
+ * nombre de places : on explique seulement pourquoi la recommandation vient
+ * après le diagnostic, et ce que le diagnostic permet de trancher.
+ */
+export const nextStep = {
   index: '16',
-  sectionLabel: 'Offre fondateur',
-  note: 'PHASE FONDATRICE',
-  title: 'Nous recherchons 5 PME fondatrices.',
-  text: 'Nous ouvrons actuellement le programme à un nombre volontairement limité d’entreprises afin de finaliser la méthode sur des situations réelles.',
-  seats: 5,
-  seatsLabel: 'Places ouvertes',
-  offer: {
-    name: 'Private AI Builder',
-    priceLabel: 'Tarif fondateur',
-    price: 1490,
-    priceUnit: '€ HT',
-    includes: [
-      'Diagnostic approfondi',
-      'Cartographie des opportunités',
-      'Roadmap IA personnalisée',
-      'Charte IA — CAPA AI Policy',
-      'Architecture recommandée',
-      'Formation',
-      'Accompagnement à l’installation',
-      'Premiers usages métier',
-      'Suivi de mise en place',
-    ],
-    exclusion: 'Matériel non compris.',
-    reserved: 'Tarif réservé aux premières entreprises participant à la phase fondatrice.',
+  sectionLabel: 'Et ensuite ?',
+  note: 'APRÈS LE DIAGNOSTIC',
+  title: 'Si le diagnostic révèle un vrai potentiel, nous allons plus loin.',
+  intro: 'Chaque entreprise est différente.',
+  comparison: [
+    'Une société de 6 personnes n’a ni les mêmes besoins,',
+    'ni la même infrastructure,',
+    'ni le même potentiel économique',
+    'qu’une entreprise de 30 personnes.',
+  ],
+  conditionLabel: 'Nous ne proposons donc pas une solution standard avant d’avoir compris',
+  conditions: [
+    'où se trouve la valeur',
+    'quels usages sont réellement pertinents',
+    'quel niveau d’accompagnement est nécessaire',
+    'quelle architecture est adaptée',
+    'et si l’investissement se justifie',
+  ],
+  closing:
+    'Lorsque cela a du sens, nous vous proposons ensuite une recommandation adaptée à votre situation.',
+  cta: { label: 'Commencer par le diagnostic', href: '#diagnostic' },
+
+  /**
+   * ROUTAGE DU DIAGNOSTIC.
+   * Les trois issues possibles, annoncées à l'avance : le lecteur sait que
+   * « faible potentiel » est une réponse acceptable. Aucun prix ici non plus.
+   *
+   * Branchement : ces trois clés correspondent aux trois sorties du
+   * formulaire (logique conditionnelle Tally). Voir links.diagnostic.
+   */
+  outcomesLabel: 'Trois issues possibles',
+  outcomes: [
+    {
+      key: 'A',
+      level: 'Faible potentiel',
+      statement: 'Une infrastructure IA importante ne semble pas nécessaire à ce stade.',
+      recommendation: 'Quelques usages simples et des ressources pour avancer seul.',
+    },
+    {
+      key: 'B',
+      level: 'Potentiel intermédiaire',
+      statement: 'Plusieurs usages méritent d’être structurés.',
+      recommendation: 'Formation, cadrage des usages et charte IA.',
+    },
+    {
+      key: 'C',
+      level: 'Potentiel élevé',
+      statement:
+        'Plusieurs processus présentent un potentiel économique suffisant pour justifier une étude approfondie.',
+      recommendation: 'Échange personnalisé, architecture, et le cas échéant IA privée.',
+    },
+  ],
+} as const;
+
+/* ── 17 — POURQUOI CAPA ──────────────────────────────────────────────────── */
+
+export const whyNoPrice = {
+  index: '17',
+  sectionLabel: 'Pourquoi CAPA',
+  note: 'AUCUN PRIX STANDARD',
+  title: 'Pourquoi nous n’affichons pas un prix unique.',
+  reason:
+    'Parce qu’un investissement n’a de sens que lorsqu’il est comparé à la valeur qu’il peut créer.',
+  needsLabel: 'Une entreprise peut avoir besoin',
+  needs: [
+    'd’une formation',
+    'd’une architecture simple',
+    'd’une automatisation',
+    'd’une IA privée',
+    'd’une approche hybride',
+    'ou parfois de rien de plus',
+  ],
+  method: 'Nous préférons comprendre le problème avant de proposer la solution.',
+  /** Le renversement de question, composé comme une affiche. */
+  flip: {
+    badLabel: 'La bonne question n’est pas',
+    bad: 'Combien coûte l’IA ?',
+    goodLabel: 'La bonne question est',
+    good: 'Combien peut-elle réellement vous rapporter ?',
   },
-  /** La charte : le volet gouvernance du programme. */
-  policy: {
-    name: 'CAPA AI POLICY',
-    label: 'Charte IA',
-    intro: 'Le programme aide également l’entreprise à définir :',
-    items: [
-      'quelles IA sont autorisées',
-      'quels usages sont autorisés',
-      'quelles informations peuvent être envoyées à un service externe',
-      'quelles informations doivent rester privées',
-      'quels utilisateurs ont accès à quoi',
-      'quand une validation humaine est obligatoire',
-      'comment tracer les usages importants',
-      'comment gérer départs et changements de salariés',
-      'comment conserver les connaissances internes',
-    ],
-    benefit: 'Passer de l’IA sauvage à une IA gouvernée.',
-  },
-  cta: { label: 'Candidater au programme', href: '#diagnostic' },
 } as const;
 
 /* ── 17 — MANIFESTE FINAL ────────────────────────────────────────────────── */
 
 export const finalManifesto = {
-  index: '17',
+  index: '18',
   sectionLabel: 'Manifeste',
   note: 'POSITION / 02',
   opening: [
