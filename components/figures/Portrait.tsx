@@ -10,7 +10,7 @@ import { founder } from '@/content/site';
  * Aucun visage n'est inventé, aucune image n'est générée.
  *
  * Pour poser la vraie photographie : déposer le fichier dans
- * `public/images/fondateur.jpg` puis renseigner `src` dans content/site.ts.
+ * `public/images/sylvain.jpg` puis renseigner `src` dans content/site.ts.
  */
 export function Portrait({ small = false }: { small?: boolean }) {
   const { src, alt, expectedPath, ratio } = founder.portrait;

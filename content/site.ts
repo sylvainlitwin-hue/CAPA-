@@ -1,50 +1,51 @@
 /**
  * ─────────────────────────────────────────────────────────────────────────────
  *  CAPA — FICHIER CENTRAL DE CONTENU
+ *  CORPORATE INTELLIGENCE 1979 / 2026
  * ─────────────────────────────────────────────────────────────────────────────
- *  Tous les textes, chiffres et images de la page sont définis ici. Aucun
- *  contenu éditorial ne doit être écrit en dur dans les composants.
+ *  Tous les textes et tous les chiffres de la page sont ici. Aucun contenu
+ *  éditorial ne doit être écrit en dur dans un composant.
  *
- *  RÈGLE D'ÉCRITURE — LA PAGE PARLE À UNE SEULE PERSONNE.
- *  Un dirigeant de PME, assis en face. Donc « je » et « vous ». Jamais
- *  « nous », jamais « les entreprises », jamais « les organisations ».
- *  Test à appliquer à chaque phrase : un patron de PME peut-il la relier
- *  immédiatement à quelque chose qu'il vit ? Si non, on la supprime.
+ *  À QUI LA PAGE PARLE — À UNE SEULE PERSONNE.
+ *  Un dirigeant-propriétaire de PME française, 5 à 30 salariés, assis en face
+ *  de Sylvain. Donc « je » et « vous ». Jamais « les entreprises », jamais
+ *  « les organisations », jamais « les décideurs », jamais « nos clients ».
+ *  Test d'écriture : cette phrase, Sylvain peut-il la dire à voix haute à un
+ *  patron, dans son atelier ou son bureau ? Si elle sonne brochure, cabinet
+ *  de conseil ou startup, on la réécrit. Si elle ne se relie à rien de vécu,
+ *  on la supprime.
  *
- *  RÈGLE DE PÉRIMÈTRE — LA HOME N'EXPLIQUE PAS TOUT LE BUSINESS.
- *  Elle a cinq rôles, dans cet ordre : faire reconnaître le problème,
- *  montrer qu'il coûte de l'argent, introduire une approche différente,
- *  donner confiance, pousser vers le diagnostic. Tout le reste appartient
- *  à une page dédiée ou à l'après-qualification : prix, offres, programme,
- *  architecture local/cloud, détails techniques, RGPD, longue explication
- *  du retour sur investissement.
+ *  CE QUE LA PAGE VEND — UNE QUESTION, PAS DE L'IA.
+ *  « Combien vous coûte encore ce que votre entreprise fait mal, lentement ou
+ *  inutilement à la main ? » Puis seulement : « est-ce que l'IA mérite
+ *  réellement d'intervenir ici ? » L'ennemi n'est pas ChatGPT, c'est l'IA
+ *  gadget : des outils ajoutés sans savoir pourquoi.
  *
- *  UN SEUL APPEL À L'ACTION : « Évaluer mon entreprise ».
+ *  CE QUI N'A PAS SA PLACE ICI : prix, abonnements, modules, packs,
+ *  formation, matériel, RAG, Docker, GPU, comparatif local/cloud, longue
+ *  section sécurité ou RGPD, marketplace, témoignages, logos, FAQ, listes de
+ *  bénéfices ou de fonctionnalités. Cette page ne vend pas tout CAPA : elle
+ *  vend la curiosité de savoir ce que le statu quo coûte.
  *
- *  ORDRE DE LECTURE
- *  01 Accroche · 02 Vous vous reconnaissez ? · 03 Le chiffre ·
- *  04 Ma méthode · 05 Le contrôle · 06 Private AI ·
- *  07 Pourquoi je travaille là-dessus · 08 Commencez par mesurer
+ *  SIX SECTIONS, UN SEUL APPEL À L'ACTION : « Évaluer mon entreprise ».
+ *  01 Ouverture · 02 Reconnaissance · 03 Le calcul ·
+ *  04 La position · 05 La capacité · 06 Le diagnostic
  * ─────────────────────────────────────────────────────────────────────────────
  */
 
 export const brand = {
   name: 'CAPA',
   wordmark: 'CAPA.',
-  signature: 'Plus de capacité. Pas nécessairement plus de salariés.',
-  signatureMono: 'PLUS DE CAPACITÉ. PAS NÉCESSAIREMENT PLUS DE SALARIÉS.',
-  baseline: 'BUILD CAPACITY. MEASURE VALUE.',
-  baselineParts: ['BUILD CAPACITY.', 'MEASURE VALUE.'],
-  location: 'France / Remote',
+  /** Ligne de régie, en monospace, dans les repères d'imprimé. */
+  documentRef: 'CAPA / NOTE D’ORIENTATION',
   edition: '2026',
-  /** Mention portée par le folio de bas de section, comme sur un rapport. */
-  documentTitle: 'Note d’orientation',
+  location: 'France',
 } as const;
 
 /**
- * Liens. Le diagnostic pointera vers un formulaire Tally :
- * remplacer `diagnostic.href` par l'URL Tally (ex. https://tally.so/r/xxxxxx)
- * — ou renseigner `diagnostic.tallyFormId` pour l'afficher en embed en § 08.
+ * Liens. Le diagnostic pointera vers un formulaire Tally : remplacer
+ * `diagnostic.href` par l'URL Tally (ex. https://tally.so/r/xxxxxx) — ou
+ * renseigner `diagnostic.tallyFormId` pour l'afficher en § 06.
  */
 export const links = {
   diagnostic: {
@@ -59,233 +60,223 @@ export const links = {
   ],
 } as const;
 
-/**
- * L'appel à l'action unique. Un seul libellé sur toute la page — barre de
- * navigation comprise. Ne pas en introduire un second.
- */
+/** L'appel à l'action unique. Un seul libellé sur toute la page. */
 export const cta = {
   label: 'Évaluer mon entreprise',
   href: '#diagnostic',
-  microcopy: 'Gratuit · 5 minutes · Aucun document confidentiel nécessaire',
-} as const;
-
-export const nav = {
-  items: [
-    { label: 'Ma méthode', href: '#methode' },
-    { label: 'Private AI', href: '#private-ai' },
-    { label: 'Diagnostic', href: '#diagnostic' },
-  ],
 } as const;
 
 /**
  * LE PORTRAIT — remplaçable sans toucher au code.
  *
- * Déposer la photographie dans `public/images/fondateur.jpg`, puis renseigner
- * `src: '/images/fondateur.jpg'`. Tant que `src` vaut `null`, un emplacement
- * réservé au format 4:5 est affiché (convention de maquette imprimée), avec
- * le chemin attendu.
+ * Déposer la photographie dans `public/images/sylvain.jpg`, puis renseigner
+ * `src`. Tant que `src` vaut `null`, un emplacement réservé au format 4:5 est
+ * affiché (convention de maquette d'imprimeur), avec le chemin attendu.
  *
- * Direction : portrait réel, naturel, noir et blanc ou monochrome, regard
- * caméra ou situation de travail. Pas de portrait de banque d'images, pas
- * d'image générée, pas de machine, pas de visuel futuriste.
+ * Direction : photographie réelle, pas un portrait corporate parfait.
+ * Entrepreneur, naturel, noir et blanc. Pas de banque d'images, pas d'image
+ * générée, pas de machine, pas de décor futuriste.
  */
 export const founder = {
   portrait: {
     src: null as string | null,
-    expectedPath: '/images/fondateur.jpg',
+    expectedPath: '/images/sylvain.jpg',
     alt: 'Portrait de Sylvain.',
-    caption: 'Sylvain.',
     ratio: '4:5',
   },
   name: 'Sylvain',
   role: 'Entrepreneur',
 } as const;
 
-/* ── 01 — ACCROCHE ───────────────────────────────────────────────────────── */
+/* ── 01 — OUVERTURE ──────────────────────────────────────────────────────── */
 
 export const hero = {
-  index: '01',
-  kicker: 'Intelligence artificielle · PME · France',
-  title: 'Combien vous coûte ce que votre entreprise fait encore à la main ?',
-  subtitle:
-    'Je vous aide à identifier où vous perdez du temps, de la capacité et de l’argent — avant de parler d’IA.',
-} as const;
-
-/* ── 02 — VOUS VOUS RECONNAISSEZ ? ───────────────────────────────────────── */
-
-export const recognition = {
-  index: '02',
-  sectionLabel: 'Reconnaissance',
-  note: 'VOUS',
-  title: 'Vous vous reconnaissez ?',
-  /** Cinq points, pas six. Chacun doit être vécu, pas expliqué. */
-  points: [
-    'Vous cherchez trop longtemps certaines informations.',
-    'Vos équipes répètent encore les mêmes tâches.',
-    'Des prospects, devis ou actions passent parfois entre les mailles.',
-    'Vos salariés utilisent probablement déjà ChatGPT ou d’autres IA.',
-    'Vous savez que l’IA devient importante mais vous ne savez pas par quoi commencer.',
+  ref: '01',
+  label: 'Ouverture',
+  note: 'PME · 5 À 30 SALARIÉS · FRANCE',
+  /** Trois lignes, composées telles quelles. */
+  title: ['Combien vous coûte', 'ce que votre entreprise', 'fait encore à la main ?'],
+  subtitle: [
+    'Je commence par mesurer vos pertes de temps, de capacité et d’argent.',
+    'Ensuite seulement, je regarde si l’IA mérite d’intervenir.',
   ],
-  closing:
-    'Si vous vous reconnaissez dans 2 ou 3 points, cela mérite probablement d’être mesuré.',
+  microcopy: 'Gratuit · 5 minutes · Aucun document confidentiel',
+  /** Ce que Sylvain dit de lui, à côté de sa photographie. */
+  statement: [
+    'Je suis entrepreneur.',
+    'J’ai commencé à construire ce système pour mes propres entreprises.',
+    'Je ne veux pas plus d’IA.',
+  ],
+  statementStrong: 'Je veux une IA qui serve réellement à quelque chose.',
 } as const;
 
-/* ── 03 — LE CHIFFRE ─────────────────────────────────────────────────────── */
+/**
+ * La bande de position — la phrase clivante de la marque. Elle ferme
+ * l'ouverture et sert de signature à toute la page.
+ */
+export const positioning = {
+  lines: [
+    'Je ne vous aide pas à mettre plus d’IA dans votre entreprise.',
+    'Je vous aide à savoir où elle vaut réellement le coup.',
+  ],
+} as const;
+
+/* ── 02 — RECONNAISSANCE ─────────────────────────────────────────────────── */
+
+/**
+ * Cinq affirmations. Pas des bénéfices, pas des fonctionnalités : des choses
+ * que le lecteur paie déjà, sans les avoir jamais chiffrées.
+ */
+export const recognition = {
+  ref: '02',
+  label: 'Reconnaissance',
+  note: 'CINQ AFFIRMATIONS',
+  title: 'Peut-être que vous payez déjà pour ça.',
+  statements: [
+    'Vous payez quelqu’un pour rechercher une information que votre entreprise possède déjà.',
+    'Vous payez quelqu’un pour refaire une réponse déjà faite vingt fois.',
+    'Vous perdez des devis ou des actions parce que personne n’a le temps de tout suivre.',
+    'Vos salariés utilisent probablement déjà ChatGPT sans vraie règle commune.',
+    'Vous envisagez parfois de recruter alors qu’une partie du problème est peut-être simplement une mauvaise circulation de l’information.',
+  ],
+  closing: [
+    'Ce ne sont pas forcément de gros problèmes.',
+    'C’est justement pour ça qu’ils coûtent cher longtemps.',
+  ],
+} as const;
+
+/* ── 03 — LE CALCUL ──────────────────────────────────────────────────────── */
 
 /**
  * ⚠ CHIFFRES ILLUSTRATIFS — mais le calcul est vrai et vérifiable :
  * 15 min × 10 fois par jour × 220 jours = 550 h / an, soit 16 500 € à 30 €/h.
- * Tout est dérivé de `params` dans lib/capa.ts : modifier ici suffit.
+ * Tout est dérivé de `params` dans lib/capa.ts : modifier ici suffit, rien
+ * n'est saisi à la main, donc rien ne peut se contredire.
  *
- * Cette section ne porte AUCUNE autre explication. Les conversions, l'abaque
- * et le graphique du Point CAPA en ont été retirés : ils appartiennent à une
- * page dédiée, pas à la home.
+ * La mention « exemple illustratif » ne doit jamais être retirée, et cette
+ * section ne porte aucune autre explication.
  */
-export const timeCost = {
-  index: '03',
-  sectionLabel: 'Le chiffre',
-  note: 'CALCUL SIMPLE',
-  title: '15 minutes peuvent coûter très cher.',
+export const figure = {
+  ref: '03',
+  label: 'Le calcul',
+  note: 'ORDRE DE GRANDEUR',
   params: { minutes: 15, perDay: 10, daysPerYear: 220, hourlyRate: 30 },
-  termUnits: ['min', 'fois / jour', 'jours'],
+  terms: ['minutes', 'fois / jour', 'jours'],
   hoursUnit: 'heures / an',
-  costUnit: '€ / an',
   rateLabel: 'À 30 € / heure',
+  costUnit: '€ / an',
   disclaimer: 'Exemple illustratif',
-  closing:
-    'Les grosses pertes sont souvent constituées de petites pertes répétées toute l’année.',
+  closing: 'Les grosses pertes sont souvent faites de petites pertes répétées.',
 } as const;
 
-/* ── 04 — MA MÉTHODE ─────────────────────────────────────────────────────── */
+/* ── 04 — LA POSITION ────────────────────────────────────────────────────── */
 
-export const method = {
-  index: '04',
-  sectionLabel: 'Ma méthode',
-  note: '3 ÉTAPES',
-  title: ['Je commence par le problème.', 'Pas par l’outil.'],
+export const provocation = {
+  ref: '04',
+  label: 'La position',
+  note: 'TROIS TEMPS',
+  title: 'Vous n’avez probablement pas besoin de plus d’IA.',
+  answer: 'Vous avez besoin de savoir où elle mérite sa place.',
   steps: [
-    {
-      n: '01',
-      title: 'Mesurer',
-      text: 'Où perdez-vous réellement du temps, de l’argent ou de la capacité ?',
-    },
-    { n: '02', title: 'Prioriser', text: 'Qu’est-ce qui mérite vraiment d’être amélioré ?' },
-    {
-      n: '03',
-      title: 'Mettre en place',
-      text: 'Ensuite seulement, nous choisissons la meilleure solution.',
-    },
+    { n: '01', title: 'Mesurer', text: 'Ce que le problème vous coûte.' },
+    { n: '02', title: 'Prioriser', text: 'Ce qui mérite réellement d’être amélioré.' },
+    { n: '03', title: 'Agir', text: 'Avec la solution la plus simple qui fonctionne.' },
   ],
-  answers: ['Parfois la réponse est un outil existant.', 'Parfois une automatisation.', 'Parfois votre propre IA privée.'],
+  options: [
+    'Parfois c’est ChatGPT.',
+    'Parfois une automatisation.',
+    'Parfois votre propre IA privée.',
+  ],
   /** La phrase qui vaut engagement. Mise en avant maximale. */
-  verdict: 'Et parfois, l’investissement ne vaut tout simplement pas le coup.',
+  verdict: 'Et parfois la bonne décision est de ne rien acheter.',
+  /** L'ennemi commun, nommé une seule fois. */
+  enemy: {
+    label: 'L’ennemi : l’IA gadget',
+    line: 'Automatiser une mauvaise façon de travailler la rend simplement mauvaise plus vite.',
+  },
 } as const;
 
-/* ── 05 — LE CONTRÔLE ────────────────────────────────────────────────────── */
+/* ── 05 — LA CAPACITÉ ────────────────────────────────────────────────────── */
 
 /**
- * L'ancienne grande section Shadow AI tient désormais en une phrase.
+ * L'intrigue, pas la démonstration. Aucun détail technique : pas de RAG, pas
+ * de Docker, pas de GPU, aucune caractéristique matérielle, aucun comparatif
+ * local/cloud. Une seule phrase sur la confidentialité.
+ *
  * Le lien ne s'affiche que si `href` est renseigné : pas de lien mort tant
  * que la page dédiée n'existe pas.
  */
-export const control = {
-  index: '05',
-  sectionLabel: 'Contrôle',
-  note: 'UNE QUESTION',
-  /** Deux temps : le constat, puis la question. */
-  statement: [
+export const capacity = {
+  ref: '05',
+  label: 'La capacité',
+  note: 'PRIVATE AI',
+  title: 'Et si votre entreprise possédait son intelligence artificielle ?',
+  text: [
+    'Une IA privée qui connaît vos documents, vos procédures, vos produits et votre manière de travailler.',
+    'Pas un chatbot de plus.',
+  ],
+  textStrong: 'Une capacité qui appartient à votre entreprise.',
+  confidentiality: [
     'Vos salariés utilisent peut-être déjà l’IA avec des informations professionnelles.',
-    'La question n’est donc plus seulement « faut-il utiliser l’IA ? », mais « comment voulez-vous la contrôler ? »',
+    'La vraie question est maintenant : qui décide où ces informations peuvent aller ?',
   ],
-  link: { label: 'Comprendre les enjeux de confidentialité', href: null as string | null },
+  link: { label: 'Pourquoi l’IA privée ?', href: null as string | null },
 } as const;
 
-/* ── 06 — PRIVATE AI ─────────────────────────────────────────────────────── */
+/* ── 06 — LE DIAGNOSTIC ──────────────────────────────────────────────────── */
 
-/**
- * Teaser seulement. Aucun détail technique : pas de RAG, pas de Docker,
- * pas de GPU, aucune caractéristique matérielle.
- */
-export const privateAi = {
-  index: '06',
-  sectionLabel: 'Private AI',
-  note: 'SI CELA A DU SENS',
-  title: 'Et lorsque cela a du sens, votre entreprise peut posséder sa propre IA.',
-  text: 'Une IA privée qui connaît vos documents, vos procédures et votre façon de travailler — sans dépendre uniquement d’outils génériques externes.',
-  link: { label: 'Découvrir Private AI', href: null as string | null },
-} as const;
-
-/* ── 07 — POURQUOI JE TRAVAILLE LÀ-DESSUS ───────────────────────────────── */
-
-export const why = {
-  index: '07',
-  sectionLabel: 'Pourquoi',
-  note: 'QUI VOUS PARLE',
-  title: 'Pourquoi je travaille là-dessus.',
-  lines: [
-    'Je suis entrepreneur.',
-    'J’ai commencé à construire ce type de système pour mes propres entreprises.',
-    'Mon objectif n’est pas de mettre de l’IA partout.',
-  ],
-  emphasis: [
-    'Je veux savoir où elle peut réellement améliorer une entreprise',
-    'et où elle ne sert à rien.',
-  ],
-} as const;
-
-/* ── 08 — COMMENCEZ PAR MESURER ─────────────────────────────────────────── */
-
-export const start = {
-  index: '08',
-  sectionLabel: 'Diagnostic',
+export const close = {
+  ref: '06',
+  label: 'Le diagnostic',
   note: 'GRATUIT / 5 MIN',
-  title: 'Commencez par mesurer.',
+  title: 'Commencez par savoir si ça vaut le coup.',
   text: 'Quelques questions suffisent pour identifier les premières zones à étudier.',
-  excludes: ['Aucun document.', 'Aucun accès à vos systèmes.', 'Aucune donnée client nécessaire.'],
+  excludes: ['Aucun document.', 'Aucun accès à vos outils.', 'Aucune donnée client nécessaire.'],
   microcopy: 'Gratuit · environ 5 minutes',
 } as const;
 
 /* ── PIED DE PAGE ────────────────────────────────────────────────────────── */
 
-export const footer = {
+export const colophon = {
   gridHint: 'GRILLE ÉDITORIALE — TOUCHE [G]',
+  /** Gamme de contrôle d'imprimeur : les quatre encres de la page. */
+  inks: [
+    { name: 'Papier', value: '#F2EFE6' },
+    { name: 'Graphite', value: '#141414' },
+    { name: 'Bleu', value: '#1358D8' },
+    { name: 'Signal', value: '#C62D16' },
+  ],
 } as const;
 
-/* ── HORS HOME : RÉSERVE ─────────────────────────────────────────────────── */
+export const meta = {
+  title: 'CAPA — Combien vous coûte ce que votre entreprise fait encore à la main ?',
+  description:
+    'Je mesure d’abord ce que vous perdez en temps, en capacité et en argent. Ensuite seulement, je regarde si l’IA mérite d’intervenir. Diagnostic gratuit en 5 minutes, pour dirigeants de PME.',
+  url: 'https://capa.fr',
+  locale: 'fr_FR',
+} as const;
+
+/* ── HORS PAGE : RÉSERVE ─────────────────────────────────────────────────── */
 
 /**
- * ⚠ CE BLOC N'EST PLUS AFFICHÉ SUR LA HOME.
+ * ⚠ CES DEUX BLOCS NE SONT PAS AFFICHÉS.
  *
- * Statistiques publiques, conservées ici parce qu'elles sont sourcées et
- * coûteuses à retrouver. Elles ont leur place sur une page dédiée
- * (« l'IA dans les PME », page méthode…), pas sur la home : « 18 % des
- * entreprises » n'est pas quelque chose qu'un dirigeant vit, donc cela
- * échoue au test d'écriture énoncé en tête de fichier.
+ * Ils appartiennent à des pages dédiées (méthode, Private AI, « l'IA dans les
+ * PME ») et sont conservés ici parce qu'ils sont coûteux à reconstituer.
  *
- * Le composant qui les affichait (components/Benchmarks.tsx) reste
- * récupérable dans l'historique git.
+ * 1. LE POINT CAPA — l'élément graphique propriétaire : la valeur nette
+ *    cumulée qui part sous zéro, traverse l'axe, puis produit de la valeur.
+ *    Le composant est prêt : `components/CapaPointChart.tsx`. Il relève de la
+ *    « longue explication du retour sur investissement » : pas sur cette page.
  *
- * À VÉRIFIER avant toute publication : ouvrir le lien et confirmer les
- * quatre valeurs. À réactualiser à chaque nouvelle vague d'enquête.
- */
-/**
- * ⚠ CE BLOC N'EST PLUS AFFICHÉ SUR LA HOME.
- *
- * Le POINT CAPA — l'élément graphique propriétaire de la marque. Retiré de
- * la home parce qu'il relève de la « longue explication du retour sur
- * investissement » : sa place est sur la page méthode ou Private AI.
- *
- * Le composant est prêt et fonctionnel : `components/CapaPointChart.tsx`
- * (tracé au défilement, deux variantes de composition). Il suffit de
- * l'importer dans la future page dédiée.
- *
- * Chiffres illustratifs, dérivés dans lib/capa.ts.
+ * 2. LES REPÈRES CHIFFRÉS — statistiques publiques sourcées. « 18 % des
+ *    entreprises » n'est pas quelque chose qu'un dirigeant vit : cela échoue
+ *    au test d'écriture énoncé en tête de fichier.
+ *    À VÉRIFIER avant toute publication : ouvrir le lien et confirmer les
+ *    quatre valeurs. À réactualiser à chaque nouvelle vague d'enquête.
  */
 export const capaPoint = {
   label: 'Point CAPA',
-  intro: 'Et quand un investissement se présente, voici comment je le juge.',
-  definition:
-    'J’estime le moment où la valeur cumulée récupérée compense l’investissement.',
   chart: {
     name: 'POINT CAPA',
     investment: 6000,
@@ -301,7 +292,12 @@ export const capaPoint = {
 export const benchmarks = {
   title: 'Où en sont les autres ?',
   figures: [
-    { value: 18, unit: '%', label: 'des entreprises implantées en France utilisent au moins une technologie d’IA', ref: '2025' },
+    {
+      value: 18,
+      unit: '%',
+      label: 'des entreprises implantées en France utilisent au moins une technologie d’IA',
+      ref: '2025',
+    },
     { value: 15, unit: '%', label: 'chez les entreprises de 10 à 49 salariés', ref: '2025' },
     { value: 58, unit: '%', label: 'chez les entreprises de 250 salariés et plus', ref: '2025' },
     { value: 8, prefix: '+', unit: 'points', label: 'de progression en un an', ref: '2024 → 2025' },
@@ -311,12 +307,4 @@ export const benchmarks = {
     href: 'https://www.insee.fr/fr/statistiques/9025878',
     linkLabel: 'Insee Première n° 2120',
   },
-} as const;
-
-export const meta = {
-  title: 'CAPA — Combien vous coûte ce que vous faites encore à la main ?',
-  description:
-    'Je vous aide à identifier où votre entreprise perd du temps, de la capacité et de l’argent — avant de parler d’IA. Diagnostic gratuit en 5 minutes, pour dirigeants de PME.',
-  url: 'https://capa.fr',
-  locale: 'fr_FR',
 } as const;

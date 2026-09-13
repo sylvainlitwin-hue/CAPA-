@@ -1,23 +1,24 @@
-import { Control } from '@/components/Control';
-import { DiagnosticCTA } from '@/components/DiagnosticCTA';
-import { Footer } from '@/components/Footer';
-import { Hero } from '@/components/Hero';
-import { Method } from '@/components/Method';
-import { Navigation } from '@/components/Navigation';
-import { PrivateAI } from '@/components/PrivateAI';
-import { Recognition } from '@/components/Recognition';
-import { TimeCost } from '@/components/TimeCost';
-import { Why } from '@/components/Why';
+import { Colophon } from '@/components/Colophon';
+import { Masthead } from '@/components/Masthead';
+import { Capacity } from '@/components/sections/Capacity';
+import { Close } from '@/components/sections/Close';
+import { Figures } from '@/components/sections/Figures';
+import { Hero } from '@/components/sections/Hero';
+import { Provocation } from '@/components/sections/Provocation';
+import { Recognition } from '@/components/sections/Recognition';
 import { GridOverlay } from '@/components/ui/GridOverlay';
 
 /**
- * Huit sections, un seul lecteur : un dirigeant de PME.
+ * Six feuilles, un seul lecteur : un dirigeant-propriétaire de PME.
  *
- * La home ne raconte pas tout le business. Elle fait reconnaître le
- * problème (01–02), montre qu'il coûte de l'argent (03), introduit une
- * approche différente (04–06), donne confiance (07) et pousse vers le
- * diagnostic (08). Le reste — prix, offres, architecture, détails
- * techniques, statistiques de marché — appartient à une page dédiée.
+ * 01 la question et l'homme qui la pose · 02 ce qu'il paie déjà ·
+ * 03 le calcul · 04 la position (« vous n'avez pas besoin de plus d'IA ») ·
+ * 05 l'intrigue · 06 le diagnostic.
+ *
+ * Cette page ne vend pas CAPA. Elle vend la curiosité de savoir ce que le
+ * statu quo coûte — et le diagnostic est ce qui résout cette tension. Tout
+ * le reste (prix, offres, technique, sécurité, formation) appartient à une
+ * page dédiée ou à l'après-qualification.
  */
 export default function Page() {
   return (
@@ -29,20 +30,18 @@ export default function Page() {
         Aller au contenu
       </a>
 
-      <Navigation />
+      <Masthead />
 
       <main>
-        {/* 01 */} <Hero />
-        {/* 02 */} <Recognition />
-        {/* 03 */} <TimeCost />
-        {/* 04 */} <Method />
-        {/* 05 */} <Control />
-        {/* 06 */} <PrivateAI />
-        {/* 07 */} <Why />
-        {/* 08 */} <DiagnosticCTA />
+        <Hero />
+        <Recognition />
+        <Figures />
+        <Provocation />
+        <Capacity />
+        <Close />
       </main>
 
-      <Footer />
+      <Colophon />
 
       <GridOverlay />
     </>

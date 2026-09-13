@@ -4,7 +4,8 @@
 
 /* ──────────────────────────────────────────────────────────────────────────
    CAPA — CORPORATE INTELLIGENCE 1979 / 2026
-   Feuille de base : papier ivoire, encre graphite, filets d'un pixel.
+   Papier ivoire, encre graphite, bleu technique, filets d'un pixel.
+   Aucune ombre, aucun angle arrondi, aucun dégradé.
    ────────────────────────────────────────────────────────────────────────── */
 
 :root {
@@ -19,13 +20,13 @@
   --rule-strong: rgba(20, 20, 20, 0.45);
   --rule-invert: rgba(242, 239, 230, 0.22);
   --shell-pad: 1.25rem;
-  --nav-h: 3.5rem;
+  --nav-h: 3.25rem;
 }
 
 @media (min-width: 768px) {
   :root {
     --shell-pad: 2.5rem;
-    --nav-h: 4rem;
+    --nav-h: 3.75rem;
   }
 }
 
@@ -54,6 +55,20 @@
     text-rendering: optimizeLegibility;
   }
 
+  /* Grain de papier — matérialité, pas texture. Il doit se sentir, jamais se
+     voir : une trame de bruit à 3,5 % sur toute la page, en produit. */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 95;
+    pointer-events: none;
+    opacity: 0.035;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23g)'/%3E%3C/svg%3E");
+    background-size: 160px 160px;
+  }
+
   ::selection {
     background: var(--blue);
     color: var(--paper);
@@ -66,13 +81,25 @@
 
   /* Chiffres toujours tabulaires : c'est un document, pas une brochure. */
   .font-mono,
-  table,
   [data-num] {
     font-variant-numeric: tabular-nums;
   }
 }
 
 @layer components {
+  /* Les éléments d'apparition sont des <span> (un titre ou un paragraphe ne
+     peut pas contenir de <div>) : il faut donc les passer en bloc.
+     ⚠ Déclaré EN PREMIER dans la couche « components » : à spécificité égale
+     c'est la dernière règle qui gagne, donc une classe de disposition définie
+     plus bas (.grid12) doit pouvoir reprendre la main sur un élément qui
+     porte aussi .reveal. Les utilitaires Tailwind (grid, flex, hidden…)
+     gagnent de toute façon, leur couche passant après celle-ci. */
+  .reveal,
+  .draw-x,
+  .draw-y {
+    display: block;
+  }
+
   /* Conteneur principal — marges franches, rien de centré artificiellement. */
   .shell {
     width: 100%;
@@ -95,17 +122,7 @@
     }
   }
 
-  /* Les éléments d'apparition sont des <span> (un titre ou un paragraphe ne
-     peut pas contenir de <div>) : il faut donc les passer en bloc. Déclaré
-     dans la couche « components » pour qu'une utilitaire de disposition
-     (grid, flex, hidden…) reprenne la main. */
-  .reveal,
-  .draw-x,
-  .draw-y {
-    display: block;
-  }
-
-  /* Étiquette monospace : numéros de section, annotations, repères. */
+  /* Étiquette monospace : repères de section, annotations, unités. */
   .label {
     font-family: var(--font-mono), ui-monospace, monospace;
     font-size: 0.6875rem;
@@ -125,33 +142,33 @@
   /* Titrage massif. Interlignage court, approche négative. */
   .display {
     font-weight: 600;
-    letter-spacing: -0.032em;
-    line-height: 0.94;
+    letter-spacing: -0.034em;
+    line-height: 0.92;
     text-wrap: balance;
   }
 
   .display-xl {
-    font-size: clamp(2.5rem, 8.2vw, 7.75rem);
+    font-size: clamp(2.625rem, 8.6vw, 8.5rem);
+  }
+
+  /* Corps du titre d'ouverture : dimensionné pour que les trois lignes
+     composées dans le contenu tiennent chacune sur une ligne à l'écran.
+     Les changer de longueur, c'est vérifier ici. */
+  .display-hero {
+    font-size: clamp(2.25rem, 6.4vw, 7rem);
   }
 
   .display-lg {
-    font-size: clamp(2.125rem, 5.6vw, 4.75rem);
+    font-size: clamp(2.125rem, 5.8vw, 5rem);
   }
 
   .display-md {
-    font-size: clamp(1.625rem, 3.2vw, 2.75rem);
-  }
-
-  /* Échelle « affiche » : les règles et les listes de principes. */
-  .display-poster {
-    font-size: clamp(1.25rem, 2.4vw, 2.125rem);
-    line-height: 1.02;
-    letter-spacing: -0.02em;
+    font-size: clamp(1.625rem, 3.3vw, 2.875rem);
   }
 
   .display-sm {
-    font-size: clamp(1.25rem, 1.9vw, 1.625rem);
-    line-height: 1.02;
+    font-size: clamp(1.25rem, 1.95vw, 1.6875rem);
+    line-height: 1.04;
     letter-spacing: -0.02em;
   }
 
@@ -159,19 +176,19 @@
   .figure-xl {
     font-family: var(--font-mono), ui-monospace, monospace;
     font-weight: 500;
-    letter-spacing: -0.05em;
-    line-height: 0.86;
+    letter-spacing: -0.055em;
+    line-height: 0.84;
     font-variant-numeric: tabular-nums;
-    font-size: clamp(3.5rem, 13vw, 7rem);
+    font-size: clamp(3.75rem, 11vw, 9rem);
   }
 
-  .figure-lg {
+  .figure-md {
     font-family: var(--font-mono), ui-monospace, monospace;
     font-weight: 500;
-    letter-spacing: -0.04em;
-    line-height: 0.9;
+    letter-spacing: -0.03em;
+    line-height: 0.92;
     font-variant-numeric: tabular-nums;
-    font-size: clamp(1.75rem, 3.4vw, 2.75rem);
+    font-size: clamp(1.75rem, 3.6vw, 3rem);
   }
 
   .body-text {
@@ -186,42 +203,14 @@
     }
   }
 
-  .rule-strong {
-    height: 1px;
-    width: 100%;
-    background: var(--rule-strong);
-  }
-
-  /* Hachure d'imprimerie : zone à récupérer, zone neutralisée. */
-  .hatch {
-    background-image: repeating-linear-gradient(
-      -45deg,
-      rgba(20, 20, 20, 0.42) 0,
-      rgba(20, 20, 20, 0.42) 1px,
-      transparent 1px,
-      transparent 6px
-    );
-  }
-
-  /* Hachure très légère : territoire non gouverné, hors du périmètre. */
-  .hatch-faint {
-    background-image: repeating-linear-gradient(
-      -45deg,
-      rgba(20, 20, 20, 0.14) 0,
-      rgba(20, 20, 20, 0.14) 1px,
-      transparent 1px,
-      transparent 9px
-    );
-  }
-
   /* Papier millimétré, très faible densité. Usage parcimonieux. */
   .graph-paper {
-    background-image: linear-gradient(to right, rgba(20, 20, 20, 0.055) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(20, 20, 20, 0.055) 1px, transparent 1px);
-    background-size: 24px 24px;
+    background-image: linear-gradient(to right, rgba(20, 20, 20, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(20, 20, 20, 0.05) 1px, transparent 1px);
+    background-size: 26px 26px;
   }
 
-  /* Bouton primaire : plaque bleue, angles vifs, capitales monospace. */
+  /* Bouton : plaque bleue, angles vifs, capitales monospace. */
   .btn {
     display: inline-flex;
     align-items: center;
@@ -234,7 +223,7 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
     border-radius: 0;
-    transition: background-color 220ms ease, color 220ms ease, transform 220ms ease;
+    transition: background-color 220ms ease, color 220ms ease;
   }
 
   .btn-primary {
@@ -244,22 +233,11 @@
   .btn-primary:hover {
     background: var(--ink);
   }
-
-  .btn-ghost {
-    border: 1px solid var(--rule-strong);
-    color: var(--ink);
-  }
-  .btn-ghost:hover {
-    background: var(--ink);
-    color: var(--paper);
-    border-color: var(--ink);
-  }
-
 }
 
 /* ── Micro-interactions ───────────────────────────────────────────────────
    Apparition par masque vertical, tracé de filet, compteur de chiffres.
-   Rien de gratuit : chaque animation accompagne une lecture.
+   Trois gestes, pas plus, et tous liés à une lecture.
    ──────────────────────────────────────────────────────────────────────── */
 
 /* Le repli sans JavaScript est assuré par la feuille <noscript> de
@@ -298,27 +276,6 @@
   transform: scaleY(1);
 }
 
-/* Curseur de terminal — un seul sur toute la page. */
-.caret {
-  display: inline-block;
-  width: 0.5em;
-  height: 0.95em;
-  background: var(--blue);
-  vertical-align: -0.1em;
-  animation: caret-blink 1.15s steps(1) infinite;
-}
-
-@keyframes caret-blink {
-  0%,
-  49% {
-    opacity: 1;
-  }
-  50%,
-  100% {
-    opacity: 0;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .reveal,
   .draw-x,
@@ -326,12 +283,6 @@
     clip-path: none !important;
     opacity: 1 !important;
     transform: none !important;
-    transition: none !important;
-  }
-  .caret {
-    animation: none;
-  }
-  .capa-chart-anim {
     transition: none !important;
   }
 }

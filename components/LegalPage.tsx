@@ -1,5 +1,5 @@
-import { Footer } from '@/components/Footer';
-import { Navigation } from '@/components/Navigation';
+import { Colophon } from '@/components/Colophon';
+import { Masthead } from '@/components/Masthead';
 
 type LegalPageProps = {
   index: string;
@@ -13,13 +13,13 @@ type LegalPageProps = {
 export function LegalPage({ index, label, title, fields, note }: LegalPageProps) {
   return (
     <>
-      <Navigation />
+      <Masthead />
       <main className="shell">
         <div className="pt-5 md:pt-6">
           <div className="rule-strong" />
           <div className="mt-3 flex items-baseline justify-between gap-4">
             <div className="flex items-baseline gap-3 md:gap-5">
-              <span className="label text-blue">§&nbsp;{index}</span>
+              <span className="label text-blue">{index}</span>
               <span className="label text-ink">{label}</span>
             </div>
             <a href="/" className="label text-ink-mute transition-colors hover:text-blue">
@@ -56,7 +56,7 @@ export function LegalPage({ index, label, title, fields, note }: LegalPageProps)
 
         <div className="h-16 md:h-24" />
       </main>
-      <Footer />
+      <Colophon />
     </>
   );
 }
